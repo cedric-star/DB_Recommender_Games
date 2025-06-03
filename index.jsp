@@ -10,6 +10,7 @@
 <title>Recommender</title>
 </head>
 <body>
+<a href="./jsp/myTest.jsp">Empfehlungen</a>
 
 <jsp:getProperty name="loginBean" property="result" /> 
 
