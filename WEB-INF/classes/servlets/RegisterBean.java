@@ -41,7 +41,7 @@ public class RegisterBean extends HttpServlet {
 		
 		sb = new StringBuffer();
 		
-		sb.append("<center><h1>Registrierung</h1></center>");
+		sb.append("<center><h1>MyRegistrierung</h1></center>");
 		sb.append("<br>\n");
 		sb.append("<br>\n");
 		
@@ -52,9 +52,9 @@ public class RegisterBean extends HttpServlet {
 		//username bereits vorhanden?
 		//eingaben zu lang?
 		sb.append("<center><FORM ACTION=\"ControllerServlet?doAction=sendRegisterData\" METHOD=\"POST\">\n" +
-				"<P>Benutzername<BR>\n" +
+				"<P>MyBenutzername<BR>\n" +
 				"<INPUT TYPE=\"TEXT\" NAME=\"username\"  SIZE=\"30\" MAXLENGTH=\"30\"></P>\n" +
-				"<P>Passwort<BR>\n" +
+				"<P>MyPasswort<BR>\n" +
 				"<INPUT TYPE=\"password\" NAME=\"password\"  SIZE=\"30\" MAXLENGTH=\"30\"></P>\n" +
 				"<INPUT TYPE=\"submit\" VALUE=\"Registrieren\">\n"+
 				"</FORM></center>\n");	

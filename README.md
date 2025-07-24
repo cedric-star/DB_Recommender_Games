@@ -34,3 +34,4 @@ Dieses System basiert auf der Nutzung von Java-Beans und einem Tomcat-Server.
 
 + zu 1.: Passe die Rechte (ideal rekursiv via "chmod -R 777" <dirname>) des Ordners an, sodass Tomcat Dateien wenn nötig verschieben kann.
 + zu 5.: Ins Hochschulnetz verbinden (via VPN oder Ethernet)
++ zu 6.: Neustarten und warten, bis es automatisch aufgeht.
