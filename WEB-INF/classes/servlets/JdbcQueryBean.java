@@ -222,41 +222,18 @@ public class JdbcQueryBean { // Probleme: initRatingsd funktioniert nicht; Bewer
 		return rs;
 	}
 
-	public void register(String[] data) {
-
-		/*
-		 * Fuer bessere Sicherheit Passwort Hashen bevor in Datenbank
-		 * geschrieben wird
-		 */
+	public void register(String user, String pass) {
 
 		result = null;
 
-		/*
-		 * Durch SQL eine Sequenz user_seq erstellen
-		 * oder UserId durch eine Abfrage ermitteln		
-		 */
-		
-		//String query = "insert into ZZZ_User values(AAC_VORLAGEN_SEQUENCE,'" + data[0] + "','"
-			//	+ data[1] + "')";
-		
-
-		
-		//System.out.println("query in QB: "+query);
-		//String query2 = "insert into ZZZ_rating(" + 
-			//	"select (select max (userid) from ZZZ_User), produktid, 0, 13 from ZZZ_produkte)";
-		//System.out.println("query2 in QB: "+query2);
+		//Vorher noch Passwort hashen, aber das findet dann in der neuen DB statt.
 
 		try {
-			ps_nutzerEinfuegen.setString(1, data[0]);
-			ps_nutzerEinfuegen.setString(2, data[1]);
-			//statement.executeQuery(query);
+			ps_nutzerEinfuegen.setString(1, user);
+			ps_nutzerEinfuegen.setString(2, pass);
 			ps_nutzerEinfuegen.executeQuery();
-			
-			//statement2.executeQuery(query2);
+
 			ps_initRatings.executeQuery();
-			StringBuffer sb = new StringBuffer();
-			
-			
 
 		} catch (SQLException e) {
 			result = "<P> SQL error: <PRE> " + e + " </PRE> </P>\n";
@@ -266,6 +243,19 @@ public class JdbcQueryBean { // Probleme: initRatingsd funktioniert nicht; Bewer
 			System.out.println(ignored);
 		}
 
+
+		/*
+		 * Durch SQL eine Sequenz user_seq erstellen
+		 * oder UserId durch eine Abfrage ermitteln
+		 */
+
+		//String query = "insert into ZZZ_User values(AAC_VORLAGEN_SEQUENCE,'" + data[0] + "','"
+		//	+ data[1] + "')";
+
+		//System.out.println("query in QB: "+query);
+		//String query2 = "insert into ZZZ_rating(" +
+		//	"select (select max (userid) from ZZZ_User), produktid, 0, 13 from ZZZ_produkte)";
+		//System.out.println("query2 in QB: "+query2);
 	}
 
 	public String getlogin() {
@@ -278,42 +268,32 @@ public class JdbcQueryBean { // Probleme: initRatingsd funktioniert nicht; Bewer
 
 	}
 
-	public boolean login(String[] loginData, LoginBean loginBean) {
-
-		//String query = "select password from ZZZ_User where username = '"
-			//	+ loginData[0] + "'";
+	public boolean login(String user, String pass, LoginBean loginBean) {
 
 		try {
 			
-			ps_getUserPasswort.setString(1, loginData[0]);
+			ps_getUserPasswort.setString(1, user);
 			ResultSet rs = ps_getUserPasswort.executeQuery();
-			
-			//ResultSet rs = statement.executeQuery(query);
-			StringBuffer sb = new StringBuffer();
+
 			String dbPass = new String();
 
 			while (rs.next()) {
 				dbPass = rs.getString(1);
 			}
 
-			if (dbPass.equals(loginData[1])) {
+			if (dbPass.equals(pass)) {
 				logged = true;
 				loginBean.logged=true;
-				
-				//rs = statement.executeQuery("select userid from ZZZ_user where username='"+loginData[0]+"'");
-				ps_getUserid.setString(1, loginData[0]);
+
+				ps_getUserid.setString(1, user);
 				rs = ps_getUserid.executeQuery();
 				while (rs.next()) {
 					userid = Integer.parseInt(rs.getString(1));
-				}	
-				
-				
-				
-
+				}
 			} else {
 				logged=false;
-				
 			}
+
 		} catch (SQLException e) {
 			result = "<P> SQL error: <PRE> " + e + " </PRE> </P>\n";
 			System.out.println(e);

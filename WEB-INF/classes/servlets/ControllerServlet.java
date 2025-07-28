@@ -70,18 +70,14 @@ public class ControllerServlet extends HttpServlet {
 
 			} else if (doAction.equals("login")) {
 
-				
-				//System.out.println("HALLOOOOOOO13");
-				String[] loginData = new String[2];
+				String user = request.getParameter("username");
+				String pass = request.getParameter("password");
 
-				loginData[0] = request.getParameter("username");
-				loginData[1] = request.getParameter("password");
-
-				queryBean.login(loginData, loginBean);
+				queryBean.login(user, pass, loginBean);
 				//System.out.println("username"+loginData[0]+"password"+loginData[1]);
 				url = "/jsp/login.jsp";
 				
-				if(queryBean.login(loginData, loginBean)) {
+				if(queryBean.login(user, pass, loginBean)) {
 					
 					//System.out.println("HALLOOOOOOO");
 				
@@ -104,10 +100,10 @@ public class ControllerServlet extends HttpServlet {
 			} else if (doAction.equals("sendRegisterData")) {
 
 				String[] data = new String[2];
-				data[0] = request.getParameter("username");
-				data[1] = request.getParameter("password");
+				String user = request.getParameter("username");
+				String pass = request.getParameter("password");
 
-				queryBean.register(data);
+				queryBean.register(user, pass);
 				url = "/index.jsp";
 
 			} else if (doAction.equals("bewertung")) {
