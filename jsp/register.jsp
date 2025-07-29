@@ -9,9 +9,18 @@
 <head>
 <link rel="stylesheet" href="style/style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>MyReco</title>
+<title>REC-Registrierung</title>
 </head>
 <body>
-<jsp:getProperty name="registerBean" property="result" /> 
+    <h1>Nutzerregistrierung</h1>
+    <br>
+    <FORM ACTION="ControllerServlet?doAction=sendRegisterData" METHOD="POST">
+        <P>MyBenutzername<BR>
+            <INPUT TYPE="TEXT" NAME="username"  SIZE="30" MAXLENGTH="30"></P>
+        <P>MyPasswort<BR>
+            <INPUT TYPE="password" NAME="password" SIZE="30" MAXLENGTH="30"></P>
+        <INPUT TYPE="submit" VALUE="Registrieren">
+    </FORM>
+<%-- <jsp:getProperty name="registerBean" property="result"/> --%>
 </body>
 </html>

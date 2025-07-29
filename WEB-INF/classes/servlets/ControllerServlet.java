@@ -70,26 +70,16 @@ public class ControllerServlet extends HttpServlet {
 
 			} else if (doAction.equals("login")) {
 
-				
-				//System.out.println("HALLOOOOOOO13");
-				String[] loginData = new String[2];
+				String user = request.getParameter("username");
+				String pass = request.getParameter("password");
 
-				loginData[0] = request.getParameter("username");
-				loginData[1] = request.getParameter("password");
+				queryBean.login(user, pass, loginBean);
+				
+				if(queryBean.login(user, pass, loginBean)) {
 
-				queryBean.login(loginData, loginBean);
-				//System.out.println("username"+loginData[0]+"password"+loginData[1]);
-				url = "/jsp/login.jsp";
-				
-				if(queryBean.login(loginData, loginBean)) {
-					
-					//System.out.println("HALLOOOOOOO");
-				
 					int anzahl = bewertungBean.anzahlBewertungen(queryBean);
 					
-					System.out.println("anzahl "+anzahl);
-					
-					if(anzahl >= benoetigteAnzahlBewertungen) {
+					if (anzahl >= benoetigteAnzahlBewertungen) {
 						bewertungBean.showEmpfehlungen(queryBean, anzahlEmpfehlungen);
 						url = "/jsp/empfehlung.jsp";
 					} else {
@@ -104,10 +94,10 @@ public class ControllerServlet extends HttpServlet {
 			} else if (doAction.equals("sendRegisterData")) {
 
 				String[] data = new String[2];
-				data[0] = request.getParameter("username");
-				data[1] = request.getParameter("password");
+				String user = request.getParameter("username");
+				String pass = request.getParameter("password");
 
-				queryBean.register(data);
+				queryBean.register(user, pass);
 				url = "/index.jsp";
 
 			} else if (doAction.equals("bewertung")) {
@@ -115,7 +105,7 @@ public class ControllerServlet extends HttpServlet {
 				bewertungBean.showElements(queryBean);
 
 				url = "/jsp/bewertung.jsp";
-			} else if (doAction.equals("bewertungsubmit")) {
+			} else if (doAction.equals("bewertungSubmit")) {
 
 				int angezeigteAnzahl = Integer.parseInt(request.getParameter("countElements"));
 				

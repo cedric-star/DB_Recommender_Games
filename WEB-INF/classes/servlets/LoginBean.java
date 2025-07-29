@@ -22,14 +22,13 @@ public class LoginBean extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getresult() {
+	public String getResult() {
 
 		StringBuffer sb = new StringBuffer();
 
 		sb.append("<center><p></p><br>");
 
 		if (logged) {
-
 			sb.append("<a href=\"ControllerServlet?doAction=bewertung\">Zur Bewertung</a><br>");
 			sb.append("<a href=\"ControllerServlet?doAction=logout\">Logout</a>");
 		} else {
