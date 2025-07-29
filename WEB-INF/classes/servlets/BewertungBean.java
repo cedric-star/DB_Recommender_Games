@@ -28,9 +28,7 @@ public class BewertungBean extends HttpServlet {
     }
     
     
-    public String getresult(){
-    	
-    	    	
+    public String getResult(){
     	return sb.toString();
     }
 
@@ -81,7 +79,7 @@ public class BewertungBean extends HttpServlet {
 		
 		sb.append("<center><p><b>Bewertung</b></p></center>");
 		sb.append("<center>Eingeloggt mit UserID: "+userid+"</center>");
-		sb.append("<center><FORM ACTION=\"ControllerServlet?doAction=bewertungsubmit\" METHOD=\"post\">");
+		sb.append("<center><FORM ACTION=\"ControllerServlet?doAction=bewertungSubmit\" METHOD=\"post\">");
 		sb.append("<table>");
 		
 			while(rs.next()) {	

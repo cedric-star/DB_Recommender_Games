@@ -1,5 +1,7 @@
 package servlets;
 
+import utility.QueryReader;
+
 import java.sql.*;
 import java.util.*;
 
@@ -21,18 +23,7 @@ public class JdbcQueryBean { // Probleme: initRatingsd funktioniert nicht; Bewer
 	private static final String dbUrl = "jdbc:oracle:thin:@regenstein.hs-harz.de:1521:DBHSH01";
 	private static final String login = "blank_future";
 	private static final String password = "future123";
-	
-	private String nutzerEinfuegen = "insert into ZZZ_User (Userid, Username, Password) values(AAC_VORLAGEN_SEQUENCE.nextval,? ,?)";
-	private String initRatings = "insert into ZZZ_Rating (select (select max (userid) from ZZZ_User), id, 0, 13 from ZZZ_Produkte)";
-	private String getUserPasswort = "select password from ZZZ_User where username = ? ";
-	private String getUserid = "select userid from ZZZ_user where username=?";
-	private String getBewertungsliste = "SELECT p.id, produktname, bewertung, description " + 
-							" from ZZZ_Produkte p, ZZZ_Rating r " + 
-							" where r.produktid = p.id and userid = ? and " + 
-							" ora_hash (p.id, (select to_char(sysdate, 'ss') from dual)) < ?";
-	private String updateBewertungen = "update ZZZ_Rating set bewertung= ?" + 
-										" where userid = ? and produktid = ?";
-	private String getAnzahlBewertungen = "select count (*) from ZZZ_Rating where userid = ? and bewertung <> 0";
+
 	private String getAehnlicheBenutzer = "select * from (select zaehler.userid, round(zaehler.zaehler / nenner.nenner,2) aehnlichkeit " + 
 			" from (select userid, sum (xxx) zaehler " + 
 			" from (select otheruser.userid, otheruser.produktid, activuser.bewertung_pears * otheruser.bewertung_pears xxx " + 
@@ -49,71 +40,7 @@ public class JdbcQueryBean { // Probleme: initRatingsd funktioniert nicht; Bewer
 			" from (select * from ZZZ_NORMPEARS where userid != ? " + 
 			" ) group by userid ) b) nenner " + 
 			" where nenner.userid = zaehler.userid and nenner <> 0) where aehnlichkeit > ? ";
-	/*private String getAehnlicheBenutzer = "select * from (select zaehler.userid, round(zaehler.zaehler / nenner.nenner,2) aehnlichkeit " + 
-			" from (select userid, sum (xxx) zaehler " + 
-			" from (select otheruser.userid, otheruser.produktid, activuser.bewertung_pears * otheruser.bewertung_pears xxx " + 
-			" from (select * from VFILMDIG_BEWERTUNGNORM where userid = ? " + 
-			" ) activuser,(select * from VFILMDIG_BEWERTUNGNORM where userid != ? " + 
-			" ) otheruser where " + 
-			" activuser.produktid = otheruser.produktid) " + 
-			" group by userid) zaehler, " + 
-			" (select b.userid, a.quadrat * b.quadrat nenner " + 
-			" from (select userid, sqrt( sum( POWER (bewertung_pears, 2) ) ) quadrat " + 
-			" from (select * from VFILMDIG_BEWERTUNGNORM where userid = ? ) " + 
-			" group by userid) a, " + 
-			" (select userid, sqrt( sum( POWER (bewertung_pears, 2) ) ) quadrat " + 
-			" from (select * from VFILMDIG_BEWERTUNGNORM where userid != ? " + 
-			" ) group by userid ) b) nenner " + 
-			" where nenner.userid = zaehler.userid and nenner <> 0) where aehnlichkeit > ? ";*/
-	/*private String getAehnlicheBenutzer = "select * from (select zaehler.userid, round(zaehler.zaehler / nenner.nenner,2) aehnlichkeit " + 
-			" from (select userid, sum (xxx) zaehler " + 
-			" from (select otheruser.userid, otheruser.produktid, activuser.bewertung * otheruser.bewertung xxx " + 
-			" from (select * from p_rating where userid = ? " + 
-			" ) activuser,(select * from p_rating where userid != ? " + 
-			" ) otheruser where " + 
-			" activuser.produktid = otheruser.produktid) " + 
-			" group by userid) zaehler, " + 
-			" (select b.userid, a.quadrat * b.quadrat nenner " + 
-			" from (select userid, sqrt( sum( POWER (bewertung, 2) ) ) quadrat " + 
-			" from (select * from p_rating where userid = ? ) " + 
-			" group by userid) a, " + 
-			" (select userid, sqrt( sum( POWER (bewertung, 2) ) ) quadrat " + 
-			" from (select * from p_rating where userid != ? " + 
-			" ) group by userid ) b) nenner " + 
-			" where nenner.userid = zaehler.userid) where aehnlichkeit > ? ";
-			*/
-	private String getProduktempfehlungen = "select * from (select produktid, produktname, dense_rank () over (order by rating desc) Rang, round (Rating, 2) Rating " + 
-											"from (select a.produktid, b.produktname, rating " + 
-											"from (select * from (select avg(Bewertung) Rating, produktid " + 
-											"from (select * from ZZZ_RATING where userid in (?) " + 
-											"and not produktid in (select produktid from ZZZ_RATING where userid = ? and Bewertung <> 0)) " + 
-											"group by produktid ) where Rating > ? ) a, ZZZ_Produkte b where a.produktid = b.produktid )) " + 
-											"where Rang <= ? order by Rang asc";	
-	/*
-	  private String getProduktempfehlungen_neu = "select * from (select produktid, produktname, dense_rank () over (order by rating desc) Rang, round (Rating, 2) Rating " + 
-	 
-			"from (select a.produktid, b.produktname, rating " + 
-			"from (select * from (select avg(Bewertung) Rating, produktid " + 
-			"from (select * from ZZZ_RATING where userid in (select * from (select zaehler.userid, round(zaehler.zaehler / nenner.nenner,2) aehnlichkeit" + 
-			"from (select userid, sum (xxx) zaehler" + 
-			"from (select otheruser.userid, otheruser.produktid, activuser.bewertung * otheruser.bewertung xxx \" + \r\n" + 
-			"from (select * from p_rating where userid = ? " + 
-			") activuser,(select * from p_rating where userid != ? " + 
-			") otheruser where " + 
-			"activuser.produktid = otheruser.produktid) " + 
-			"group by userid) zaehler, " + 
-			"(select b.userid, a.quadrat * b.quadrat nenner " + 
-			"from (select userid, sqrt( sum( POWER (bewertung, 2) ) ) quadrat " + 
-			"from (select * from p_rating where userid = ? ) " + 
-			"group by userid) a, " + 
-			"(select userid, sqrt( sum( POWER (bewertung, 2) ) ) quadrat " + 
-			"from (select * from p_rating where userid != ? " + 
-			") group by userid ) b) nenner " + 
-			"where nenner.userid = zaehler.userid) where aehnlichkeit > ? ) " + 
-			"and not produktid in (select produktid from ZZZ_RATING where userid = ? and Bewertung <> 0)) " + 
-			"group by produktid ) where Rating > ? ) a, ZZZ_Produkte b where a.produktid = b.produktid )) " + 
-			"where Rang <= ? order by Rang asc";
-			*/	
+
 	private String getBeliebteProdukte = "select produktname, description from ZZZ_produkte " +
 		       "where id in (select id from (" +
 		       "select id, rank() over (order by xxx desc) yyy from " +
@@ -180,17 +107,16 @@ public class JdbcQueryBean { // Probleme: initRatingsd funktioniert nicht; Bewer
 	
 	private void initPreparedStatement() {
 		try {
-			ps_nutzerEinfuegen = connection.prepareStatement(nutzerEinfuegen);
-			ps_initRatings = connection.prepareStatement(initRatings);
-			ps_getUserPasswort = connection.prepareStatement(getUserPasswort);
-			ps_getUserid = connection.prepareStatement(getUserid);
-			ps_getBewertungsliste = connection.prepareStatement(getBewertungsliste);
-			ps_updateBewertungen = connection.prepareStatement(updateBewertungen);
-			ps_getAnzahlBewertungen = connection.prepareStatement(getAnzahlBewertungen);
-			ps_getAehnlicheBenutzer = connection.prepareStatement(getAehnlicheBenutzer);
-			ps_getProduktempfehlungen = connection.prepareStatement(getProduktempfehlungen);
-			//ps_getProduktempfehlungen_neu = connection.prepareStatement(getProduktempfehlungen_neu);
-			ps_getBeliebteProdukte = connection.prepareStatement(getBeliebteProdukte);
+			ps_nutzerEinfuegen = connection.prepareStatement(QueryReader.getQuery("insertUser"));
+			ps_initRatings = connection.prepareStatement(QueryReader.getQuery("initRatings"));
+			ps_getUserPasswort = connection.prepareStatement(QueryReader.getQuery("getUserPassword"));
+			ps_getUserid = connection.prepareStatement(QueryReader.getQuery("getUserID"));
+			ps_getBewertungsliste = connection.prepareStatement(QueryReader.getQuery("getRatingList"));
+			ps_updateBewertungen = connection.prepareStatement(QueryReader.getQuery("updateRatings"));
+			ps_getAnzahlBewertungen = connection.prepareStatement(QueryReader.getQuery("getRatingCount"));
+			ps_getAehnlicheBenutzer = connection.prepareStatement(QueryReader.getQuery("getSimilarUsers"));
+			ps_getProduktempfehlungen = connection.prepareStatement(QueryReader.getQuery("getProductRecommendations"));
+			ps_getBeliebteProdukte = connection.prepareStatement(QueryReader.getQuery("getPopularProducts"));
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -271,7 +197,6 @@ public class JdbcQueryBean { // Probleme: initRatingsd funktioniert nicht; Bewer
 	public boolean login(String user, String pass, LoginBean loginBean) {
 
 		try {
-			
 			ps_getUserPasswort.setString(1, user);
 			ResultSet rs = ps_getUserPasswort.executeQuery();
 
@@ -293,7 +218,6 @@ public class JdbcQueryBean { // Probleme: initRatingsd funktioniert nicht; Bewer
 			} else {
 				logged=false;
 			}
-
 		} catch (SQLException e) {
 			result = "<P> SQL error: <PRE> " + e + " </PRE> </P>\n";
 			System.out.println(e);

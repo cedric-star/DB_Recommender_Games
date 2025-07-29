@@ -74,18 +74,12 @@ public class ControllerServlet extends HttpServlet {
 				String pass = request.getParameter("password");
 
 				queryBean.login(user, pass, loginBean);
-				//System.out.println("username"+loginData[0]+"password"+loginData[1]);
-				url = "/jsp/login.jsp";
 				
 				if(queryBean.login(user, pass, loginBean)) {
-					
-					//System.out.println("HALLOOOOOOO");
-				
+
 					int anzahl = bewertungBean.anzahlBewertungen(queryBean);
 					
-					System.out.println("anzahl "+anzahl);
-					
-					if(anzahl >= benoetigteAnzahlBewertungen) {
+					if (anzahl >= benoetigteAnzahlBewertungen) {
 						bewertungBean.showEmpfehlungen(queryBean, anzahlEmpfehlungen);
 						url = "/jsp/empfehlung.jsp";
 					} else {
@@ -111,7 +105,7 @@ public class ControllerServlet extends HttpServlet {
 				bewertungBean.showElements(queryBean);
 
 				url = "/jsp/bewertung.jsp";
-			} else if (doAction.equals("bewertungsubmit")) {
+			} else if (doAction.equals("bewertungSubmit")) {
 
 				int angezeigteAnzahl = Integer.parseInt(request.getParameter("countElements"));
 				
