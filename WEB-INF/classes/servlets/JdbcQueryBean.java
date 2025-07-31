@@ -1,9 +1,18 @@
 package servlets;
 
 import utility.QueryReader;
+import utility.PasswordProcessor;
 
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+import java.math.BigInteger;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
 import java.sql.*;
 import java.util.*;
+import javax.servlet.http.*;
 
 public class JdbcQueryBean { // Probleme: initRatingsd funktioniert nicht; Bewertungen werden nicht aktualisiert- ANmeldung, registrierung funktioniert soweit
 
@@ -24,83 +33,42 @@ public class JdbcQueryBean { // Probleme: initRatingsd funktioniert nicht; Bewer
 	private static final String login = "blank_future";
 	private static final String password = "future123";
 
-	private String getAehnlicheBenutzer = "select * from (select zaehler.userid, round(zaehler.zaehler / nenner.nenner,2) aehnlichkeit " + 
-			" from (select userid, sum (xxx) zaehler " + 
-			" from (select otheruser.userid, otheruser.produktid, activuser.bewertung_pears * otheruser.bewertung_pears xxx " + 
-			" from (select * from ZZZ_NORMPEARS where userid = ? " + 
-			" ) activuser,(select * from ZZZ_NORMPEARS where userid != ? " + 
-			" ) otheruser where " + 
-			" activuser.produktid = otheruser.produktid) " + 
-			" group by userid) zaehler, " + 
-			" (select b.userid, a.quadrat * b.quadrat nenner " + 
-			" from (select userid, sqrt( sum( POWER (bewertung_pears, 2) ) ) quadrat " + 
-			" from (select * from ZZZ_NORMPEARS where userid = ? ) " + 
-			" group by userid) a, " + 
-			" (select userid, sqrt( sum( POWER (bewertung_pears, 2) ) ) quadrat " + 
-			" from (select * from ZZZ_NORMPEARS where userid != ? " + 
-			" ) group by userid ) b) nenner " + 
-			" where nenner.userid = zaehler.userid and nenner <> 0) where aehnlichkeit > ? ";
-
-	private String getBeliebteProdukte = "select produktname, description from ZZZ_produkte " +
-		       "where id in (select id from (" +
-		       "select id, rank() over (order by xxx desc) yyy from " +
-		       "(select distinct id, avg(bewertung_pears) over (partition by produktid) xxx " +
-		       "from ZZZ_NORMPEARS where bewertung_pears > 0)) where yyy <= 5)";
-
 	private PreparedStatement ps_nutzerEinfuegen = null;
 	private PreparedStatement ps_initRatings = null;
 	private PreparedStatement ps_getUserPasswort = null;
+	private PreparedStatement ps_getUserSalt = null;
 	private PreparedStatement ps_getUserid = null;
 	private PreparedStatement ps_getBewertungsliste = null;
 	private PreparedStatement ps_updateBewertungen = null;
 	private PreparedStatement ps_getAnzahlBewertungen = null;
 	private PreparedStatement ps_getAehnlicheBenutzer = null;
 	private PreparedStatement ps_getProduktempfehlungen = null;
-	private PreparedStatement ps_getProduktempfehlungen_neu = null;
 	private PreparedStatement ps_getBeliebteProdukte = null;
-	
-	/*
-	 * Benutzte Daten auf Datenbank sind:
-	 * 
-	 * table ZZZ_user (userid, name, password)
-	 * table ZZZ_produkt (produktname) (hier sollte es auch eine ID geben)
-	 * table bewertungen (userid, produkt, bewertung)
-	 * 
-	 * user_seq (beginnt mit 1, wird um 1 incrementiert) 
-	 * 
-	 *  
-	 *  Diese gilt es an das eigene System anzupassen
-	 * 
-	 */
-	
 
 	boolean logged = false;
 
 	public JdbcQueryBean() {
-
-		this.dbConnection();
+		this.establishDBConnection();
 	}
 
-	public void dbConnection() {
+	public void establishDBConnection() {
 
 		try {
 			Class.forName(driver);
 			connection = DriverManager.getConnection(dbUrl, login, password);
 			statement = connection.createStatement();
-			statement2 = connection.createStatement();
 			initPreparedStatement();
-		} catch (java.lang.ClassNotFoundException e) {
+		} catch (java.lang.ClassNotFoundException cnfe) {
 			System.err.print("ClassNotFoundException: ");
-			System.err.println(e.getMessage());
+			System.err.println(cnfe.getMessage());
 			connection = null;
-
-		} catch (SQLException ex) {
+		} catch (SQLException se) {
 			System.err.print("SQLException: ");
-			System.err.println(ex.getMessage());
+			System.err.println(se.getMessage());
 			connection = null;
-		} catch (Exception ne) {
+		} catch (Exception ex) {
 			System.err.print("Other Error while connecting to the database : ");
-			System.err.println(ne.getMessage());
+			System.err.println(ex.getMessage());
 			connection = null;
 		}
 	}
@@ -110,6 +78,7 @@ public class JdbcQueryBean { // Probleme: initRatingsd funktioniert nicht; Bewer
 			ps_nutzerEinfuegen = connection.prepareStatement(QueryReader.getQuery("insertUser"));
 			ps_initRatings = connection.prepareStatement(QueryReader.getQuery("initRatings"));
 			ps_getUserPasswort = connection.prepareStatement(QueryReader.getQuery("getUserPassword"));
+			ps_getUserSalt = connection.prepareStatement(QueryReader.getQuery("getUserSalt"));
 			ps_getUserid = connection.prepareStatement(QueryReader.getQuery("getUserID"));
 			ps_getBewertungsliste = connection.prepareStatement(QueryReader.getQuery("getRatingList"));
 			ps_updateBewertungen = connection.prepareStatement(QueryReader.getQuery("updateRatings"));
@@ -117,18 +86,17 @@ public class JdbcQueryBean { // Probleme: initRatingsd funktioniert nicht; Bewer
 			ps_getAehnlicheBenutzer = connection.prepareStatement(QueryReader.getQuery("getSimilarUsers"));
 			ps_getProduktempfehlungen = connection.prepareStatement(QueryReader.getQuery("getProductRecommendations"));
 			ps_getBeliebteProdukte = connection.prepareStatement(QueryReader.getQuery("getPopularProducts"));
-			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.err.println("Error occured during fetching of SQL Statements: ");
+			System.err.println(e.getMessage());
 		}
 	}
 
 	public String getResult() {
-
 		return result;
-
 	}
 
+	/*
 	protected void finalize() {
 		try {
 			connection.close();
@@ -136,11 +104,12 @@ public class JdbcQueryBean { // Probleme: initRatingsd funktioniert nicht; Bewer
 		} catch (SQLException e) {
 		}
 	}
+ */
 	
 	public ResultSet executeQuery(String query){
-		ResultSet rs=null;
+		ResultSet rs = null;
 		try {
-		rs = statement.executeQuery(query);
+			rs = statement.executeQuery(query);
 		} catch(Exception e) {			
 			System.out.println(e);
 			return null;
@@ -148,15 +117,16 @@ public class JdbcQueryBean { // Probleme: initRatingsd funktioniert nicht; Bewer
 		return rs;
 	}
 
-	public void register(String user, String pass) {
+	public void register(String user, String pass) throws InvalidKeySpecException, NoSuchAlgorithmException {
 
 		result = null;
-
-		//Vorher noch Passwort hashen, aber das findet dann in der neuen DB statt.
+		byte[] salt = PasswordProcessor.getRandomSalt();
+		String hashedPW = PasswordProcessor.getHashedPW(pass, salt);
 
 		try {
 			ps_nutzerEinfuegen.setString(1, user);
-			ps_nutzerEinfuegen.setString(2, pass);
+			ps_nutzerEinfuegen.setString(2, hashedPW);
+			ps_nutzerEinfuegen.setString(3, PasswordProcessor.getHashHex(salt));
 			ps_nutzerEinfuegen.executeQuery();
 
 			ps_initRatings.executeQuery();
@@ -168,23 +138,9 @@ public class JdbcQueryBean { // Probleme: initRatingsd funktioniert nicht; Bewer
 			result = "<P> Error: <PRE> " + ignored + " </PRE> </P>\n";
 			System.out.println(ignored);
 		}
-
-
-		/*
-		 * Durch SQL eine Sequenz user_seq erstellen
-		 * oder UserId durch eine Abfrage ermitteln
-		 */
-
-		//String query = "insert into ZZZ_User values(AAC_VORLAGEN_SEQUENCE,'" + data[0] + "','"
-		//	+ data[1] + "')";
-
-		//System.out.println("query in QB: "+query);
-		//String query2 = "insert into ZZZ_rating(" +
-		//	"select (select max (userid) from ZZZ_User), produktid, 0, 13 from ZZZ_produkte)";
-		//System.out.println("query2 in QB: "+query2);
 	}
 
-	public String getlogin() {
+	public String getLogin() {
 
 		if (logged) {
 			return "<center><p>Login erfolgreich</p><br><a href=\"index.jsp\">weiter</a></center>";
@@ -196,20 +152,32 @@ public class JdbcQueryBean { // Probleme: initRatingsd funktioniert nicht; Bewer
 
 	public boolean login(String user, String pass, LoginBean loginBean) {
 
+		boolean logged = baseLogin(user, pass);
+		loginBean.logged = logged;
+		return logged;
+	}
+
+	public boolean baseLogin(String user, String pass) {
+
 		try {
 			ps_getUserPasswort.setString(1, user);
 			ResultSet rs = ps_getUserPasswort.executeQuery();
-
-			String dbPass = new String();
-
+			String dbPass = "";
 			while (rs.next()) {
 				dbPass = rs.getString(1);
 			}
 
-			if (dbPass.equals(pass)) {
-				logged = true;
-				loginBean.logged=true;
+			ps_getUserSalt.setString(1, user);
+			ResultSet rs2 = ps_getUserSalt.executeQuery();
+			String dbSalt = "";
+			while (rs2.next()) {
+				dbSalt = rs2.getString(1);
+			}
 
+			String proofPW = PasswordProcessor.getHashedPW(pass, PasswordProcessor.hexStringToByteArray(dbSalt));
+
+			if (dbPass.equals(proofPW)) {
+				logged = true;
 				ps_getUserid.setString(1, user);
 				rs = ps_getUserid.executeQuery();
 				while (rs.next()) {
@@ -271,7 +239,6 @@ public class JdbcQueryBean { // Probleme: initRatingsd funktioniert nicht; Bewer
 		ResultSet rs = null;
 		try {
 			rs = ps_getBeliebteProdukte.executeQuery();
-			System.out.println("Beliebte: "+getBeliebteProdukte);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -287,7 +254,6 @@ public class JdbcQueryBean { // Probleme: initRatingsd funktioniert nicht; Bewer
 			ps_getAehnlicheBenutzer.setString(3, userid);
 			ps_getAehnlicheBenutzer.setString(4, userid);
 			ps_getAehnlicheBenutzer.setDouble(5, mindestAehnlichkeit);
-			System.out.println("Aehnliche Benutzer: "+getAehnlicheBenutzer);
 			rs = ps_getAehnlicheBenutzer.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
