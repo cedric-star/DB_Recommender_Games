@@ -2,8 +2,6 @@ package servlets;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
-import java.io.*;
-import java.util.*;
 
 public class ControllerServlet extends HttpServlet {
 
@@ -63,6 +61,8 @@ public class ControllerServlet extends HttpServlet {
 
 			if (doAction.equals("register")) {
 
+				System.out.println("Redirecting to register.jsp");
+
 				controlParam = "index";
 				registerBean.showFormular();
 
@@ -72,6 +72,8 @@ public class ControllerServlet extends HttpServlet {
 
 				String user = request.getParameter("username");
 				String pass = request.getParameter("password");
+
+				System.out.println(user + " " + pass);
 
 				queryBean.login(user, pass, loginBean);
 				
@@ -93,9 +95,12 @@ public class ControllerServlet extends HttpServlet {
 
 			} else if (doAction.equals("sendRegisterData")) {
 
+				System.out.println("Sending register data");
 				String[] data = new String[2];
 				String user = request.getParameter("username");
 				String pass = request.getParameter("password");
+
+				System.out.println(user + " " + pass);
 
 				queryBean.register(user, pass);
 				url = "/index.jsp";
@@ -108,15 +113,9 @@ public class ControllerServlet extends HttpServlet {
 			} else if (doAction.equals("bewertungSubmit")) {
 
 				int angezeigteAnzahl = Integer.parseInt(request.getParameter("countElements"));
-				
-				String[] bewertungen = new String[Integer.parseInt(request
-						.getParameter("countElements"))];
-				
-				String[] produktid = new String[Integer.parseInt(request
-						.getParameter("countElements"))];
 
-				bewertungen = request.getParameterValues("bewertung");
-				produktid = request.getParameterValues("produktid");
+				String[] bewertungen = request.getParameterValues("bewertung");
+				String[] produktid = request.getParameterValues("produktid");
 
 				bewertungBean.abgegeben(queryBean, bewertungen, produktid);
 				int anzahl = bewertungBean.anzahlBewertungen(queryBean);

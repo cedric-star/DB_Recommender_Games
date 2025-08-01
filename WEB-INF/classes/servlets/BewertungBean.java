@@ -64,8 +64,8 @@ public class BewertungBean extends HttpServlet {
 		//System.out.println("query: "+query);
 		//rs=queryBean.executeQuery(query);
 		
-		rs = queryBean.executegetBewertungsliste(userid, 2);
-		rs2 = queryBean.executegetAnzahlBewertungen(userid);
+		rs = queryBean.executeGetRatingList(userid, 2);
+		rs2 = queryBean.executeGetAnzahlBewertungen(userid);
 		try {
         while(rs2.next()) {
         	sb.append("Anzahl Bewertungen bisher:"+rs2.getString(1)+"!");
@@ -130,7 +130,7 @@ public class BewertungBean extends HttpServlet {
 //			//System.out.println("query2: "+query2);
 //		}
 		
-		queryBean.executeupdateBewertungen(bewertungen, produktid, userid);
+		queryBean.executeUpdateRatings(bewertungen, produktid, userid);
 		
 		sb=new StringBuffer("Bewertung erfolgreich abgegeben");
 		
@@ -224,7 +224,7 @@ public class BewertungBean extends HttpServlet {
 				} else {
 					sb.append("Du bist ein graues Schaf");
 					sb.append(". Trotzdem kannst du dir natürlich gerne die folgenden Empfehlungen ansehen ...");
-					beliebte = queryBean.executegetBeliebteProdukte();
+					beliebte = queryBean.executeGetBeliebteProdukte();
 					while(beliebte.next())
 					{
 						
@@ -258,7 +258,7 @@ public class BewertungBean extends HttpServlet {
 //			
 //			ResultSet anzahlrs = queryBean.executeQuery(query);
 			System.out.println("bewertungssubmit userid "+userid);
-			ResultSet anzahlrs = queryBean.executegetAnzahlBewertungen(userid);
+			ResultSet anzahlrs = queryBean.executeGetAnzahlBewertungen(userid);
 			
 			while (anzahlrs.next()) {
 				anzahlBewertungen = anzahlrs.getInt(1);
@@ -292,7 +292,7 @@ public class BewertungBean extends HttpServlet {
 //		System.out.println("Aehnliche Benutzerquery: "+query);
 //		ResultSet rsAehnliche = queryBean.executeQuery(query);
 		
-		ResultSet rsAehnliche = queryBean.executegetAehnlicheBenutzer(userid, mindestAehnlichkeit);
+		ResultSet rsAehnliche = queryBean.executeGetAehnlicheBenutzer(userid, mindestAehnlichkeit);
 		return rsAehnliche;
 	}
 	
