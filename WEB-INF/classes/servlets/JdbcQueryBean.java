@@ -2,32 +2,20 @@ package servlets;
 
 import utility.QueryReader;
 import utility.PasswordProcessor;
-
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
-import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
-import java.security.spec.KeySpec;
 import java.sql.*;
-import java.util.*;
-import javax.servlet.http.*;
 
-public class JdbcQueryBean { // Probleme: initRatingsd funktioniert nicht; Bewertungen werden nicht aktualisiert- ANmeldung, registrierung funktioniert soweit
+
+public class JdbcQueryBean {
 
 	private Connection connection;
 	private Statement statement;
-	private Statement statement2;
 
 	private String result = null;
 	
 	public int userid=0;
 
-	/*
-	 * Hier Bitte die eigenen Benutzerdaten eintragen und daf�r sorgen, dass die
-	 * Tabellen in die Eingetragen wird existieren
-	 */
 	private static final String driver = "oracle.jdbc.driver.OracleDriver";
 	private static final String dbUrl = "jdbc:oracle:thin:@regenstein.hs-harz.de:1521:DBHSH01";
 	private static final String login = "blank_future";
@@ -38,8 +26,8 @@ public class JdbcQueryBean { // Probleme: initRatingsd funktioniert nicht; Bewer
 	private PreparedStatement ps_getUserPasswort = null;
 	private PreparedStatement ps_getUserSalt = null;
 	private PreparedStatement ps_getUserid = null;
-	private PreparedStatement ps_getBewertungsliste = null;
-	private PreparedStatement ps_updateBewertungen = null;
+	private PreparedStatement ps_getRatingList = null;
+	private PreparedStatement ps_updateRatings = null;
 	private PreparedStatement ps_getAnzahlBewertungen = null;
 	private PreparedStatement ps_getAehnlicheBenutzer = null;
 	private PreparedStatement ps_getProduktempfehlungen = null;
@@ -80,8 +68,8 @@ public class JdbcQueryBean { // Probleme: initRatingsd funktioniert nicht; Bewer
 			ps_getUserPasswort = connection.prepareStatement(QueryReader.getQuery("getUserPassword"));
 			ps_getUserSalt = connection.prepareStatement(QueryReader.getQuery("getUserSalt"));
 			ps_getUserid = connection.prepareStatement(QueryReader.getQuery("getUserID"));
-			ps_getBewertungsliste = connection.prepareStatement(QueryReader.getQuery("getRatingList"));
-			ps_updateBewertungen = connection.prepareStatement(QueryReader.getQuery("updateRatings"));
+			ps_getRatingList = connection.prepareStatement(QueryReader.getQuery("getRatingList"));
+			ps_updateRatings = connection.prepareStatement(QueryReader.getQuery("updateRatings"));
 			ps_getAnzahlBewertungen = connection.prepareStatement(QueryReader.getQuery("getRatingCount"));
 			ps_getAehnlicheBenutzer = connection.prepareStatement(QueryReader.getQuery("getSimilarUsers"));
 			ps_getProduktempfehlungen = connection.prepareStatement(QueryReader.getQuery("getProductRecommendations"));
@@ -105,13 +93,20 @@ public class JdbcQueryBean { // Probleme: initRatingsd funktioniert nicht; Bewer
 		}
 	}
  */
-	
+
+	/**
+	 * Executes a query on the blank_future database. The results are given as a resultset.
+	 * The resultset can be read in a while-loop (resultset.next()). The pointer starts before the first
+	 * row of data and then goes thru the rest. The resultset can contain zero or more results.
+	 * @param query Query die auszuführen ist
+	 * @return Resultset as described above
+	 */
 	public ResultSet executeQuery(String query){
 		ResultSet rs = null;
 		try {
 			rs = statement.executeQuery(query);
-		} catch(Exception e) {			
-			System.out.println(e);
+		} catch(Exception e) {
+			System.err.println(e.getMessage());
 			return null;
 		}
 		return rs;
@@ -133,10 +128,10 @@ public class JdbcQueryBean { // Probleme: initRatingsd funktioniert nicht; Bewer
 
 		} catch (SQLException e) {
 			result = "<P> SQL error: <PRE> " + e + " </PRE> </P>\n";
-			System.out.println(e);
+			System.err.println(e.getMessage());
 		} catch (Exception ignored) {
 			result = "<P> Error: <PRE> " + ignored + " </PRE> </P>\n";
-			System.out.println(ignored);
+			System.err.println(ignored.getMessage());
 		}
 	}
 
@@ -196,34 +191,48 @@ public class JdbcQueryBean { // Probleme: initRatingsd funktioniert nicht; Bewer
 		return logged;
 	}
 
-	public ResultSet executegetBewertungsliste(int userid, int zufall) {
+	public int executeGetUserID(String username) throws SQLException {
 		ResultSet rs = null;
 		try {
-			ps_getBewertungsliste.setInt(1, userid);
-			ps_getBewertungsliste.setInt(2, zufall);
-			rs = ps_getBewertungsliste.executeQuery();
+			ps_getUserid.setString(1, username);
+			rs = ps_getUserid.executeQuery();
 		} catch (SQLException e) {
-			e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+
+		int id = 0;
+		while (rs.next()) {
+			id = Integer.parseInt(rs.getString(1));
 		}
-		return rs;
-	}
-	
-	public void executeupdateBewertungen(String[] bewertung, String[] produktid, int userid) {
-		System.out.println(bewertung);
+		return id;
+    }
+
+	public ResultSet executeGetRatingList(int userid, int zufall) {
+		ResultSet results = null;
 		try {
-			for(int i = 0; i<bewertung.length;i++) {
-				ps_updateBewertungen.setString(1, bewertung[i]);
-				ps_updateBewertungen.setInt(2, userid);
-				ps_updateBewertungen.setString(3, produktid[i]);
-				ps_updateBewertungen.executeQuery();
-			}
-			
+			ps_getRatingList.setInt(1, userid);
+			ps_getRatingList.setInt(2, zufall);
+			results = ps_getRatingList.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return results;
 	}
 	
-	public ResultSet executegetAnzahlBewertungen(int userid) {
+	public void executeUpdateRatings(String[] ratings, String[] productids, int userid) {
+		try {
+			for(int i = 0; i<ratings.length;i++) {
+				ps_updateRatings.setString(1, ratings[i]);
+				ps_updateRatings.setInt(2, userid);
+				ps_updateRatings.setString(3, productids[i]);
+				ps_updateRatings.executeQuery();
+			}
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+		}
+	}
+	
+	public ResultSet executeGetAnzahlBewertungen(int userid) {
 		ResultSet rs = null;
 		try {
 			ps_getAnzahlBewertungen.setInt(1, userid);
@@ -235,7 +244,7 @@ public class JdbcQueryBean { // Probleme: initRatingsd funktioniert nicht; Bewer
 		return rs;
 	}
 	
-	public ResultSet executegetBeliebteProdukte() {
+	public ResultSet executeGetBeliebteProdukte() {
 		ResultSet rs = null;
 		try {
 			rs = ps_getBeliebteProdukte.executeQuery();
@@ -246,7 +255,7 @@ public class JdbcQueryBean { // Probleme: initRatingsd funktioniert nicht; Bewer
 	}
 	
 	
-	public ResultSet executegetAehnlicheBenutzer(String userid, double mindestAehnlichkeit) {
+	public ResultSet executeGetAehnlicheBenutzer(String userid, double mindestAehnlichkeit) {
 		ResultSet rs = null;
 		try {
 			ps_getAehnlicheBenutzer.setString(1, userid);
@@ -280,30 +289,6 @@ public class JdbcQueryBean { // Probleme: initRatingsd funktioniert nicht; Bewer
 		}
 		return rs;
 	}
-	
-	/*public ResultSet executegetProduktempfehlungen_neu(String userid, int anzahlEmpfehlungen, double mindestRating, double mindestAehnlichkeit) {
-		ResultSet rs = null;
-		System.out.println("userid: "+userid);
-		System.out.println("mindestRating: "+mindestRating);
-		System.out.println("anzahlEmpfehlungen: "+anzahlEmpfehlungen);
-		try {
-			ps_getProduktempfehlungen_neu.setString(1, userid);
-			ps_getProduktempfehlungen_neu.setString(2, userid);
-			ps_getProduktempfehlungen_neu.setString(3, userid);
-			ps_getProduktempfehlungen_neu.setString(4, userid);
-			ps_getProduktempfehlungen_neu.setDouble(5, mindestAehnlichkeit);
-			ps_getProduktempfehlungen_neu.setString(6, userid);
-			ps_getProduktempfehlungen_neu.setDouble(7, mindestRating);
-			ps_getProduktempfehlungen_neu.setInt(8, anzahlEmpfehlungen);
-			System.out.println("prod: "+ps_getProduktempfehlungen_neu.toString());
-			rs = ps_getProduktempfehlungen.executeQuery();
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
-		return rs;
-	}
-	*/
 
 	public ResultSet executegetProduktempfehlungen2(String userid, int anzahlEmpfehlungen, String userliste, double mindestRating) {
 		ResultSet rs = null;
