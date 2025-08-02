@@ -1,5 +1,6 @@
 package servlets;
 
+import jakarta.servlet.http.HttpServlet;
 import utility.QueryReader;
 import utility.PasswordProcessor;
 import java.security.NoSuchAlgorithmException;
@@ -7,7 +8,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.sql.*;
 
 
-public class JdbcQueryBean {
+public class JdbcQueryBean extends HttpServlet {
 
 	private Connection connection;
 	private Statement statement;

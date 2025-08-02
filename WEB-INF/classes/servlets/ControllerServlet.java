@@ -1,7 +1,12 @@
 package servlets;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class ControllerServlet extends HttpServlet {
 
@@ -90,17 +95,17 @@ public class ControllerServlet extends HttpServlet {
 					}
 					
 				} else {
-					url = "/login.jsp";
+					url = "/jsp/login.jsp";
 				}
 
 			} else if (doAction.equals("sendRegisterData")) {
 
-				System.out.println("Sending register data");
+
 				String[] data = new String[2];
 				String user = request.getParameter("username");
 				String pass = request.getParameter("password");
 
-				System.out.println(user + " " + pass);
+				System.out.println("Sending register data for " + user + " with password \"" + pass + "\"");
 
 				queryBean.register(user, pass);
 				url = "/index.jsp";

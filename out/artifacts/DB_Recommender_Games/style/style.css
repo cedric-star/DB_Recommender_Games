@@ -1,0 +1,127 @@
+body {
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+    font-family: Helvetica, sans-serif;
+    color: #232323;
+    background-image: linear-gradient(#dae9f3, #e0daf5);
+    box-sizing: border-box;
+    padding: 15px 30px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    width: 100%;
+    min-height: 65vh;
+    height: fit-content;
+
+    border-style: solid;
+    border-width: 5px;
+    border-color: #e2e2ef;
+}
+
+form {
+    box-sizing: border-box;
+    padding: 15px;
+    min-height: 200px;
+
+    background-image: linear-gradient(#93cbea, #789cea);
+
+    display: flex;
+    flex-flow: wrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-evenly;
+
+    border: 5px solid var(#93cbea);
+    border-radius: 10px;
+}
+
+input, textarea {
+    background-image: linear-gradient(var(#93cbea), var(789cea));
+    padding: 5px;
+
+    border: 2px solid var(93cbea);
+    border-radius: 10px;
+}
+
+a:link, a:visited, a:active {
+    color: #262e40;
+}
+
+#fehler {
+    margin-bottom: 10px; /* Weniger Abstand */
+    color: red;
+    font-weight: bold;
+}
+
+table {
+    width: 80%; /* Breite der Tabelle */
+    margin: 20px auto; /* Zentrierung horizontal */
+    border-collapse: collapse; /* Saubere Zellgrenzen */
+    background-color: white; /* Weißer Hintergrund */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Schatten für Sichtbarkeit */
+}
+
+table th, table td {
+    padding: 10px; /* Konsistenter Abstand in Zellen */
+    text-align: center; /* Zentrierung des Inhalts */
+    border: 1px solid #ddd; /* Dezente Zellränder */
+}
+
+table th {
+    background-color: #f0f0f0; /* Hellgrauer Header */
+    color: black; /* Schwarze Schrift */
+    font-weight: bold;
+}
+
+table#aufgabe {
+    width: 90%; /* Mehr Platz für diese Tabelle */
+    margin: 20px auto; /* Zentriert */
+}
+
+table#aufgabe td span#date {
+    display: inline-block;
+    text-align: right; /* Rechtsbündig */
+    padding-right: 15px; /* Platz rechts von der Zellkante */
+    width: calc(100% - 15px); /* Dynamisch mit Platz rechts */
+}
+
+.mod-font {
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+}
+
+button, input[type="submit"]{
+    background-color: #adb5bd; /* Hellgrau für die Buttons */
+    color: black; /* Schwarze Schriftfarbe für alle Buttons */
+    padding: 10px 20px; /* Angemessenes Padding für eine gute Größe */
+    font-size: 14px; /* Kleinere Schriftgröße */
+    border: none; /* Keine Ränder */
+    border-radius: 5px; /* Abgerundete Ecken */
+    cursor: pointer; /* Hand-Cursor für klickbare Elemente */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Schattierung für Tiefe */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Übergänge für Hover und Interaktionen */
+    width: auto; /* Breite passt sich dem Inhalt an */
+    min-width: 150px; /* Mindestbreite von 150px */
+    text-align: center; /* Zentriert den Text */
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #868e96; /* Etwas dunkleres Grau bei Hover */
+    transform: scale(1.05); /* Leicht vergrößern bei Hover für visuellen Effekt */
+}
+
+button:focus, input[type="submit"]:focus {
+    outline: none; /* Entfernt den Fokus-Rand */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Blauer Schatten, wenn der Button fokussiert ist */
+}
+
+
+
+
+
+
+

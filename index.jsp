@@ -7,7 +7,7 @@
 <head>
 <link rel="stylesheet" href="style/style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Recommender</title>
+<title>REC - Start</title>
 </head>
 <body>
 <a href="./jsp/myTest.jsp">Empfehlungen</a>
