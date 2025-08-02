@@ -9,9 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="201da4e9-997d-43f6-8254-f5f70575bde5" name="Changes" comment="First commit of new branch">
-      <change beforePath="$PROJECT_DIR$/.idea/DB_Recommender_Games.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DB_Recommender_Games.iml" afterDir="false" />
+    <list default="true" id="201da4e9-997d-43f6-8254-f5f70575bde5" name="Changes" comment="Class Building Fixed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +74,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
+    "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
@@ -206,7 +206,7 @@
       <option name="presentableId" value="Default" />
       <updated>1754162865691</updated>
       <workItem from="1754162867311" duration="248000" />
-      <workItem from="1754163124804" duration="4122000" />
+      <workItem from="1754163124804" duration="5879000" />
     </task>
     <task id="LOCAL-00001" summary="First commit of new branch">
       <option name="closed" value="true" />
@@ -216,7 +216,15 @@
       <option name="project" value="LOCAL" />
       <updated>1754167091628</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Class Building Fixed">
+      <option name="closed" value="true" />
+      <created>1754169450911</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1754169450911</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -224,6 +232,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First commit of new branch" />
-    <option name="LAST_COMMIT_MESSAGE" value="First commit of new branch" />
+    <MESSAGE value="Class Building Fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Class Building Fixed" />
   </component>
 </project>

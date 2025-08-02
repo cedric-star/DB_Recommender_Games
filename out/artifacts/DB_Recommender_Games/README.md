@@ -10,6 +10,15 @@ Dieses System basiert auf der Nutzung von Java-Beans und einem Tomcat-Server.
 
 ## Installation
 
+### Voraussetzungen
+
+### IntelliJ
+
+### Datagrip
+
+### Problembehebung
+
+
 1. Klone das Repo in einen beliebigen Ordner (mit ausreichenden Rechten.)
 2. Starte das Projekt in IntelliJ Ultimate Edition 
 3. Passe Projektstruktur an:
