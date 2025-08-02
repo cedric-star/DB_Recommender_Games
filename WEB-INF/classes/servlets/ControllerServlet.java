@@ -100,12 +100,12 @@ public class ControllerServlet extends HttpServlet {
 
 			} else if (doAction.equals("sendRegisterData")) {
 
-				System.out.println("Sending register data");
+
 				String[] data = new String[2];
 				String user = request.getParameter("username");
 				String pass = request.getParameter("password");
 
-				System.out.println(user + " " + pass);
+				System.out.println("Sending register data for " + user + " with password \"" + pass + "\"");
 
 				queryBean.register(user, pass);
 				url = "/index.jsp";

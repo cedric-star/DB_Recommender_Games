@@ -9,41 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="201da4e9-997d-43f6-8254-f5f70575bde5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/DB_Recommender_Games.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/DB_Recommender_Games.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/guicedee_services_jakarta_servlet_api.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WEB-INF/WEB-INF.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WEB-INF/lib/ojdbc17.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WEB-INF/web_old.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/ojdbc17.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/ojdbc17.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/oracle_database_jdbc_ojdbc10.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/metrics/1753991783667.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DB_Recommender_Games.iml" beforeDir="false" afterPath="$PROJECT_DIR$/DB_Recommender_Games.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/servlets/BewertungBean.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/servlets/BewertungBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/servlets/BewertungBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/servlets/ControllerServlet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/servlets/ControllerServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/servlets/ControllerServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/servlets/JdbcQueryBean.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/servlets/JdbcQueryBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/servlets/JdbcQueryBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/servlets/LoginBean.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/servlets/LoginBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/servlets/LoginBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/servlets/RegisterBean.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/servlets/RegisterBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/servlets/RegisterBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/utility/DevTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/utility/DevTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/utility/PasswordProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/utility/PasswordProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/utility/QueryReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/utility/QueryReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/utility/queries.properties" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/utility/queries.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/index.jsp" afterDir="false" />
+    <list default="true" id="201da4e9-997d-43f6-8254-f5f70575bde5" name="Changes" comment="First commit of new branch">
+      <change beforePath="$PROJECT_DIR$/.idea/DB_Recommender_Games.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DB_Recommender_Games.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,6 +65,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
     "Tomcat Server.Tomcat 11.0.9.executor": "Run",
     "git-widget-placeholder": "updated__tomcat",
     "junie.onboarding.icon.badge.shown": "true",
@@ -108,6 +77,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   }
@@ -236,11 +206,24 @@
       <option name="presentableId" value="Default" />
       <updated>1754162865691</updated>
       <workItem from="1754162867311" duration="248000" />
-      <workItem from="1754163124804" duration="3624000" />
+      <workItem from="1754163124804" duration="4122000" />
     </task>
+    <task id="LOCAL-00001" summary="First commit of new branch">
+      <option name="closed" value="true" />
+      <created>1754167091628</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1754167091628</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="First commit of new branch" />
+    <option name="LAST_COMMIT_MESSAGE" value="First commit of new branch" />
   </component>
 </project>
