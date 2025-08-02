@@ -9,7 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="201da4e9-997d-43f6-8254-f5f70575bde5" name="Changes" comment="Class Building Fixed">
+    <list default="true" id="201da4e9-997d-43f6-8254-f5f70575bde5" name="Changes" comment="README update und weitere Tests">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
@@ -74,10 +74,10 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
+    "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   }
@@ -206,7 +206,8 @@
       <option name="presentableId" value="Default" />
       <updated>1754162865691</updated>
       <workItem from="1754162867311" duration="248000" />
-      <workItem from="1754163124804" duration="5879000" />
+      <workItem from="1754163124804" duration="6658000" />
+      <workItem from="1754170832718" duration="5443000" />
     </task>
     <task id="LOCAL-00001" summary="First commit of new branch">
       <option name="closed" value="true" />
@@ -224,7 +225,15 @@
       <option name="project" value="LOCAL" />
       <updated>1754169450911</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="README update und weitere Tests">
+      <option name="closed" value="true" />
+      <created>1754174883943</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1754174883943</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -233,6 +242,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First commit of new branch" />
     <MESSAGE value="Class Building Fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Class Building Fixed" />
+    <MESSAGE value="README update und weitere Tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="README update und weitere Tests" />
   </component>
 </project>

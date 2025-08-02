@@ -34,6 +34,8 @@ Die Tomcat-Installation wird jedoch *nicht* mitgeliefert. Entsprechend muss die 
 
 ### IntelliJ
 
+**ACHTUNG: Bei Erstellung des Projekts (siehe Schritt 1) sollte die gesamte Konfiguration, bis auf das Verzeichnis der Tomcat-Installation (siehe Schritt 3.2) bereits vorhanden sein. Die Befolgung aller weiteren Schritte ist zu empfehlen, falls es Probleme bei der Ausführung gibt.** 
+
 1. Neues Projekt anlegen (empfohlen: File > New > Project from Version Control...)
 2. Navigiere zu Project Structure - File > Project Structure...
    1. Menüpunkt "Project" - SDK: JDK Version 19+ auswählen, Language Level: Auf 19 setzen

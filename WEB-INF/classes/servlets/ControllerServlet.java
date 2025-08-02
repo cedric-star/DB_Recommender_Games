@@ -95,7 +95,7 @@ public class ControllerServlet extends HttpServlet {
 					}
 					
 				} else {
-					url = "/login.jsp";
+					url = "/jsp/login.jsp";
 				}
 
 			} else if (doAction.equals("sendRegisterData")) {
