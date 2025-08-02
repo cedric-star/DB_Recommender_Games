@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="DB_Recommender_Games" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="201da4e9-997d-43f6-8254-f5f70575bde5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/DB_Recommender_Games.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/DB_Recommender_Games.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/guicedee_services_jakarta_servlet_api.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WEB-INF/WEB-INF.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WEB-INF/lib/ojdbc17.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WEB-INF/web_old.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/ojdbc17.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/ojdbc17.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/oracle_database_jdbc_ojdbc10.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/metrics/1753991783667.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB_Recommender_Games.iml" beforeDir="false" afterPath="$PROJECT_DIR$/DB_Recommender_Games.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/servlets/BewertungBean.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/servlets/BewertungBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/servlets/BewertungBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/servlets/ControllerServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/servlets/ControllerServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/servlets/ControllerServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/servlets/JdbcQueryBean.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/servlets/JdbcQueryBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/servlets/JdbcQueryBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/servlets/LoginBean.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/servlets/LoginBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/servlets/LoginBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/servlets/RegisterBean.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/servlets/RegisterBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/servlets/RegisterBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/utility/DevTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/utility/DevTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/utility/PasswordProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/utility/PasswordProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/utility/QueryReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/utility/QueryReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/utility/queries.properties" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/utility/queries.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/index.jsp" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;HNT-3R&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/cedric-star/DB_Recommender_Games.git&quot;,
+    &quot;accountId&quot;: &quot;3c8a2bca-13f3-4dac-811b-d2085ab542bc&quot;
+  }
+}</component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="30kDq47jscaLPpQ3pzdbNg16U87" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Dev.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Tomcat Server.Tomcat 11.0.9.executor": "Run",
+    "git-widget-placeholder": "updated__tomcat",
+    "junie.onboarding.icon.badge.shown": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Jakob\Documents\Programs\DB_Recommender_Games\WEB-INF\lib" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Tomcat Server.Tomcat 11.0.9">
+    <configuration name="Dev" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="19" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="utility.DevTest" />
+      <module name="DB_Recommender_Games" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tomcat 11.0.9" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 11.0.9" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="19" nameIsGenerated="true">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/DB_Recommender_Games" />
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <artifact name="DB_Recommender_Games">
+          <settings>
+            <option name="CONTEXT_PATH" value="/DB_Recommender_Games" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="1bcd895d-e426-4173-8901-9e6d75576334" />
+      </server-settings>
+      <log_file alias="Tomcat Manager Log" path="%IDEA_RUN:CATALINA_BASE%/logs/manager.*" />
+      <log_file alias="Tomcat Host Manager Log" path="%IDEA_RUN:CATALINA_BASE%/logs/host-manager.*" />
+      <log_file alias="Tomcat Localhost Access Log" path="%IDEA_RUN:CATALINA_BASE%/logs/localhost_access_log.*" />
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="53997" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="MakeProject" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="DB_Recommender_Games" />
+        </option>
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Dev" />
+      <item itemvalue="Tomcat Server.Tomcat 11.0.9" />
+    </list>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.27812.49" />
+        <option value="bundled-js-predefined-d6986cc7102b-09060db00ec0-JavaScript-IU-251.27812.49" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="201da4e9-997d-43f6-8254-f5f70575bde5" name="Changes" comment="" />
+      <created>1754162865691</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1754162865691</updated>
+      <workItem from="1754162867311" duration="248000" />
+      <workItem from="1754163124804" duration="3624000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
