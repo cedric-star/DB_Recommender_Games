@@ -33,13 +33,14 @@ public class LoginBean extends HttpServlet {
 			sb.append("<a href=\"ControllerServlet?doAction=bewertung\">Zur Bewertung</a><br>");
 			sb.append("<a href=\"ControllerServlet?doAction=logout\">Logout</a>");
 		} else {
-			sb.append("<h1>Bitte registrieren oder einloggen</h1>");
-			sb.append("<a href=\"ControllerServlet?doAction=register\">Zur Registrierung</a><br>"
+			sb.append("<h1>Anmeldung</h1>");
+			sb.append("<p>Du brauchst noch einen Account? Hier geht es zur <a href=\"ControllerServlet?doAction=register\">Registrierung</a></p>"
+							+ "<br>"
 							+ "    	<br>"
 							+ "    	<FORM ACTION=\"ControllerServlet?doAction=login\" METHOD=\"POST\">"
 							+ "    	<p>Benutzername </p><input type=\"text\" name=\"username\"></input>"
 							+ "    	<p>Passwort </p><input type=\"password\" name=\"password\"></input><br><br>"
-							+ "    	<INPUT TYPE=\"submit\" VALUE=\"einloggen\">");
+							+ "    	<INPUT TYPE=\"submit\" VALUE=\"Einloggen\">");
 		}
 		sb.append("    	</form>" + "    	</center>");
 
