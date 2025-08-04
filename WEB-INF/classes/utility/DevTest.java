@@ -1,42 +1,47 @@
 package utility;
 
+import servlets.BewertungBean;
 import servlets.JdbcQueryBean;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.ResultSet;
+import java.sql.SQLDataException;
 import java.sql.SQLException;
 
 public class DevTest {
 
     public static void main(String[] args) {
         System.out.println("Hello Obama");
-        //passTest();
-        //PreparedStatement stm = c.prepareStatement(Queries.getQuery("update_query"));
-        String user = "Lizzy";
-        String pass = "JMyBeloved";
-        //registerTest(user, pass);
-        //loginTest(user, pass);
+        String user = "Pomni";
+        String pass = "pom";
         int userID = getUserID(user);
 
+        JdbcQueryBean bean = new JdbcQueryBean();
+        bean.executeGetProductRecommendations(userID,5, "25, 26", 2);
+
+    }
+
+    public static void similarUsersTest(int userID) {
+        JdbcQueryBean jdbcQueryBean = new JdbcQueryBean();
+        ResultSet rs = null;
         try {
-            ratingCountTest(userID, user);
-            showRatingsTest(user, userID, 50);
+            rs = jdbcQueryBean.executeGetSimilarUsers(String.valueOf(userID), 2);
+            while (rs.next()) {
+                System.out.println(rs.getString(1));
+            }
+        } catch (SQLDataException e) {
+            e.printStackTrace();
+            System.out.println("Eww.");
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Unable to get similar users.");
+        } catch (Exception e) {
+            System.out.println("Other exception kind.");
         }
 
-        String[] ratings = {"2", "9"};
-        String[] prodIDs = {"2", "3"};
+        BewertungBean bean = new BewertungBean();
+        //bean.showEmpfehlungen(jdbcQueryBean, 10);
 
-        rateProductTest(ratings, prodIDs, userID);
-
-        try {
-            ratingCountTest(userID, user);
-            showRatingsTest(user, userID, 50);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public static void registerTest(String user, String pass) {
@@ -76,7 +81,7 @@ public class DevTest {
     public static void ratingCountTest(int id, String name) throws SQLException {
         JdbcQueryBean jdbcQueryBean = new JdbcQueryBean();
 
-        ResultSet rs = jdbcQueryBean.executeGetAnzahlBewertungen(id);
+        ResultSet rs = jdbcQueryBean.executeGetRatingCount(id);
 
         int count = 0;
         while(rs.next()) {

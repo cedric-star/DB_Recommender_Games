@@ -55,19 +55,13 @@ public class BewertungBean extends HttpServlet {
 		
 		ResultSet rs=null;
 		ResultSet rs2=null;
-		//query = "SELECT p.produktid, produktname, bewertung "
-			//	+ "from Vorlage_Produkte p, Vorlage_Rating r " 
-				//+ "where r.produktid = p.produktid and userid = "+userid+" and " 
-				//+ "ora_hash (p.produktid, (select to_char(sysdate, 'ss') from dual)) < 10";
 		
-		//System.out.println("query: "+query);
-		//rs=queryBean.executeQuery(query);
-		
-		rs = queryBean.executeGetRatingList(userid, 2);
-		rs2 = queryBean.executeGetAnzahlBewertungen(userid);
+		rs = queryBean.executeGetRatingList(userid, 50);
+		rs2 = queryBean.executeGetRatingCount(userid);
+
 		try {
         while(rs2.next()) {
-        	sb.append("Anzahl Bewertungen bisher:"+rs2.getString(1)+"!");
+        	sb.append("Anzahl Bewertungen bisher: "+rs2.getString(1)+"");
         	}
 		
 		/*
@@ -77,7 +71,7 @@ public class BewertungBean extends HttpServlet {
 		 */
 		
 		sb.append("<center><p><b>Bewertung</b></p></center>");
-		sb.append("<center>Eingeloggt mit UserID: "+userid+"</center>");
+		sb.append("<center>Eingeloggt mit UserID: " + userid + "</center>");
 		sb.append("<center><FORM ACTION=\"ControllerServlet?doAction=bewertungSubmit\" METHOD=\"post\">");
 		sb.append("<table>");
 		
@@ -88,9 +82,9 @@ public class BewertungBean extends HttpServlet {
 				sb.append(rs.getString(2));
 				sb.append("<p>");
 				sb.append(rs.getString(4));
-				sb.append(": </td><td><select name=\"bewertung\">" +
+				sb.append("</td><td><select name=\"bewertung\">" +
 						"<option>"+rs.getString(3)+"</option>" +
-						"<option>1</option>" +							
+						"<option>1</option>" +
 						"<option>2</option>" +
 						"<option>3</option>" +
 						"<option>4</option>" +
@@ -118,20 +112,10 @@ public class BewertungBean extends HttpServlet {
 
 	public void abgegeben(JdbcQueryBean queryBean, String[] bewertungen, String[] produktid) {
 		
-		int userid=queryBean.userid;
-		String query2 = null;
-		
-//		for (int i=0; i<bewertungen.length; i++){
-//			query2 = "update Vorlage_Rating set bewertung= "
-//					+bewertungen[i]+" where userid = "+userid+" and produktid = "+produktid[i]+"";
-//		
-//			queryBean.executeQuery(query2);
-//			//System.out.println("query2: "+query2);
-//		}
-		
+		int userid = queryBean.userid;
 		queryBean.executeUpdateRatings(bewertungen, produktid, userid);
 		
-		sb=new StringBuffer("Bewertung erfolgreich abgegeben");
+		sb=new StringBuffer("Bewertung erfolgreich abgegeben.");
 		
 		for (int i=0;i<bewertungen.length;i++){
 			
@@ -144,105 +128,119 @@ public class BewertungBean extends HttpServlet {
 	public void showEmpfehlungen(JdbcQueryBean queryBean, int anzahl) {
 		
 		int userid = queryBean.userid;
-		//String userid = ""+queryBean.userid;
 		sb = new StringBuffer();
 		double minAehnlichkeit = 0.2;
-		double mindestRating = 0;
-		int benoetigteAnzahl = 10;
-		SortedList liste = new SortedList();
+		int benoetigteAnzahl = 5;
+		SortedList similarUserList = new SortedList();
 		String[] median = null;
-		String userListe = null;
 		ResultSet aehnliche = null;
-		ResultSet beliebte = null;
-		
-		sb.append("Hier könnten Empfehlungen stehen");
-		sb.append("<br><br>");
-		sb.append("Du kannst aber noch weitere Bewertungen abgeben");
-		sb.append("<br><br>");
-		sb.append("<a href=\"ControllerServlet?doAction=bewertung\">Zur Bewertung</a>");
+
+		sb.append("<h1>Empfehlungen</h1>");
+		sb.append("Hier finden Sie ihre Empfehlungen!");
+		sb.append("<br>");
+		sb.append("Sie können jedoch weitere Empfehlungen abgeben!");
+		sb.append("<a href=\"ControllerServlet?doAction=bewertung\">Weitere Bewertungen abgeben.</a>");
 		sb.append("<br><br>");
 		sb.append("<a href=\"ControllerServlet?doAction=logout\">Zum Logout</a>");
 		sb.append("<br><br>");
-		aehnliche = getAehnlicheBenutzer(queryBean, Integer.toString(userid), minAehnlichkeit);
-		
-		try {
-			while(aehnliche.next()) {
-				liste.insert(aehnliche.getString(2), aehnliche.getString(1));
-				System.out.println("userid"+queryBean.userid);
-				liste.ausgeben();
+
+		aehnliche = queryBean.executeGetSimilarUsers(String.valueOf(userid), minAehnlichkeit);
+
+		fillSimilarUserList(aehnliche, similarUserList);
+
+        if (!similarUserList.isEmpty()) {
+            System.out.println("Liste Groesse: "+similarUserList.size());
+            if (similarUserList.size() >= benoetigteAnzahl) {
+                sb.append(showUserRecs(queryBean, similarUserList, userid, benoetigteAnzahl));
+            } else {
+                sb.append("Wir haben leider keine Empfehlungen für Sie. Schauen Sie später nochmal vorbei!");
+            }
+        } else {
+            sb.append(showGreySheepRecs(queryBean));
+        }
+
+        similarUserList.clearList();
+    }
+
+	public String showUserRecs(JdbcQueryBean queryBean, SortedList similarUserList, int userID, int recCount) {
+
+		int mindestRating = 5;
+		String sqlUserList = "";
+		StringBuilder sb = new StringBuilder();
+
+		for (int i = 0; i < similarUserList.size(); i++) {
+			if (similarUserList.get(i) == null) {
+				System.out.println("Null Element!");
 			}
-				if(liste.size() != 0) {
-					System.out.println("Liste Gr��e: "+liste.size());
-					median = liste.getMedian();
-					System.out.println("Median: "+median[0]+" "+median[1]);
-					while(liste.size() < benoetigteAnzahl && median != null) {
-						aehnliche = getAehnlicheBenutzer(queryBean, median[1], minAehnlichkeit);
-						while(aehnliche.next()) {
-							liste.insert(aehnliche.getString(2), aehnliche.getString(1));
-							System.out.println("Ähnliche" + aehnliche.getString(2));
-							System.out.println("Ähnliche2" + aehnliche.getString(1));
-						}
-						liste.ausgeben();
-						median = liste.getMedian();
-						System.out.println("Median1: "+median[0]+" "+median[1]);
-					}
-					if(liste.size()>=benoetigteAnzahl) {
-						for(int i = 0; i<liste.size(); i++) {
-							if(i==0) {
-								userListe = liste.get(i)[1];
-							}else {
-								userListe = userListe+","+liste.get(i)[1];
-							}
-							
-						}
-						System.out.println("user Anzahl: "+liste.size());
-						System.out.println("UserListe: "+userListe);
-						ResultSet empfehlungen = getProduktempfehlungen(queryBean, Integer.toString(userid), anzahl, userListe, mindestRating);
-						
-						sb.append("<center><table width=\"80%;\">");
-						sb.append("<tr><td colspan=\"2\">");
-						sb.append("<p style=\"text-align: center; font-size: 1.5em; color:red; font-weight: bold;\">");
-						sb.append("Dies solltest Du UNBEDINGT anschauen!</p>");
-						sb.append("</td></tr>");
-						sb.append("<tr><td> <p style=\"font-size: 1.3em; color:green;\">");
-						sb.append("<u>Empfehlungen</u></p></td><td><p style=\"font-size: 1.3em; color:red;\"><u>Bewertung</u></p>");
-						sb.append("</td></tr>");
-						
-						while(empfehlungen.next()) {
-							
-							sb.append("<tr>");
-							sb.append("<td><p style=\"font-size: 1.3em; color:black;\">"+empfehlungen.getString(2)+"</p></td>");
-							sb.append("<td><p style=\"font-size: 1.3em; color:blue;\">"+empfehlungen.getString(4)+"</p></td>");
-							sb.append("</tr>");
-							
-						}
-						sb.append("</table></center>");
-					}else {
-						sb.append("Bitte besuche uns sp�ter wieder. Wir haben leider keine Empfehlungen für dich");
-					}
-				} else {
-					sb.append("Du bist ein graues Schaf");
-					sb.append(". Trotzdem kannst du dir natürlich gerne die folgenden Empfehlungen ansehen ...");
-					beliebte = queryBean.executeGetBeliebteProdukte();
-					while(beliebte.next())
-					{
-						
-						sb.append("<tr>");
-						sb.append("<td><p style=\"font-size: 1.3em; color:black;\">"+beliebte.getString(1)+"</p></td>");
-						//sb.append("<td><p style=\"font-size: 1.3em; color:blue;\">"+beliebte.getString(2)+"</p></td>");
-						sb.append("</tr>");
-						
-					}
-					sb.append("<a href=\"ControllerServlet?doAction=logout\">Zum Logout</a>");
-				}
-				liste.clearList();
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			if(i == 0) {
+				sqlUserList = similarUserList.get(i)[1];
+			}else {
+				sqlUserList = sqlUserList + "," + similarUserList.get(i)[1];
+			}
 		}
-		
+
+		System.out.println("Ähnliche User Anzahl: " + similarUserList.size());
+		System.out.println("Ähnliche User: " + sqlUserList);
+
+		sb.append("<center><table width=\"80%;\">");
+		sb.append("<tr><td colspan=\"2\">");
+		sb.append("<p style=\"text-align: center; font-size: 1.5em; color:red; font-weight: bold;\">");
+		sb.append("Dies sollten Sie sich unbedingt anschauen!</p>");
+		sb.append("</td></tr>");
+		sb.append("<tr><td>");
+		sb.append("<p><u class=\"rating-table\">Empfehlungen</u></p></td>");
+		sb.append("<td><p><u class=\"rating-table\">Bewertung</u></p>");
+		sb.append("</td></tr>");
+
+		try {
+			ResultSet recommendations = queryBean.executeGetProductRecommendations(userID, recCount, sqlUserList, mindestRating);
+			while(recommendations.next()) {
+
+				sb.append("<tr>");
+				sb.append("<td><p style=\"font-size: 1.3em; color:black;\">"+recommendations.getString(2)+"</p></td>");
+				sb.append("<td><p style=\"font-size: 1.3em; color:blue;\">"+recommendations.getString(4)+"</p></td>");
+				sb.append("</tr>");
+
+			}
+		} catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        sb.append("</table></center>");
+		return sb.toString();
 	}
+
+	public String showGreySheepRecs(JdbcQueryBean queryBean) {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("Du bist ein graues Schaf. Niemand ist dir ähnlich.");
+		sb.append("Trotzdem kannst du dir natürlich gerne die beliebten Produkte ansehen...");
+		try {
+			ResultSet popularProducts = queryBean.executeGetBeliebteProdukte();
+			while(popularProducts.next())
+			{
+				sb.append("<tr>");
+				sb.append("<td><p style=\"font-size: 1.3em; color:black;\">"+popularProducts.getString(1)+"</p></td>");
+				sb.append("</tr>");
+			}
+		} catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        sb.append("<a href=\"ControllerServlet?doAction=logout\">Zum Logout</a>");
+		return sb.toString();
+	}
+
+	public void fillSimilarUserList(ResultSet rs, SortedList list) {
+		try {
+			while(rs.next()) {
+				list.insert(rs.getString(2), rs.getString(1));
+			}
+			list.ausgeben();
+		} catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 	
 	public int anzahlBewertungen(JdbcQueryBean queryBean) {
 		
@@ -251,13 +249,8 @@ public class BewertungBean extends HttpServlet {
 		String query = null;
 		
 		try {
-//			query = "select count (*) from Vorlage_Rating "
-//					+"where userid = "+userid+" and bewertung <> 0";
-//			System.out.println("query in anzahlBewertungen: "+query);
-//			
-//			ResultSet anzahlrs = queryBean.executeQuery(query);
-			System.out.println("bewertungssubmit userid "+userid);
-			ResultSet anzahlrs = queryBean.executeGetAnzahlBewertungen(userid);
+			System.out.println("Bewertungen abgegeben für UserID " + userid);
+			ResultSet anzahlrs = queryBean.executeGetRatingCount(userid);
 			
 			while (anzahlrs.next()) {
 				anzahlBewertungen = anzahlrs.getInt(1);
@@ -269,48 +262,6 @@ public class BewertungBean extends HttpServlet {
 		
 		return anzahlBewertungen;
 	}
-	
-	public ResultSet getAehnlicheBenutzer(JdbcQueryBean queryBean, String userid, double mindestAehnlichkeit) {
-//		String query = "select * from (select zaehler.userid, round(zaehler.zaehler / nenner.nenner,2) aehnlichkeit " + 
-//				"from (select userid, sum (xxx) zaehler " + 
-//				"from (select otheruser.userid, otheruser.produktid, activuser.bewertung * otheruser.bewertung xxx " + 
-//				"from (select * from p_rating where userid = " +userid+ 
-//				") activuser,(select * from p_rating where userid != " + userid + 
-//				") otheruser where " + 
-//				"activuser.produktid = otheruser.produktid) " + 
-//				"group by userid) zaehler, " + 
-//				"(select b.userid, a.quadrat * b.quadrat nenner " + 
-//				"from (select userid, sqrt( sum( POWER (bewertung, 2) ) ) quadrat " + 
-//				"from (select * from p_rating where userid = " +userid+ ") " + 
-//				"group by userid) a, " + 
-//				"(select userid, sqrt( sum( POWER (bewertung, 2) ) ) quadrat " + 
-//				"from (select * from p_rating where userid != " +userid+ 
-//				") group by userid ) b) nenner " +  
-//				"where nenner.userid = zaehler.userid) where aehnlichkeit > "+mindestAehnlichkeit;
-//		
-//		System.out.println("Aehnliche Benutzerquery: "+query);
-//		ResultSet rsAehnliche = queryBean.executeQuery(query);
-		
-		ResultSet rsAehnliche = queryBean.executeGetAehnlicheBenutzer(userid, mindestAehnlichkeit);
-		return rsAehnliche;
-	}
-	
-	public ResultSet getProduktempfehlungen(JdbcQueryBean queryBean, String userid, int anzahlEmpfehlungen, String userliste, double mindestRating) {
-		String query = null;
-		query = 
-				"select * from (select produktid, produktname, dense_rank () over (order by rating desc) Rang, round (Rating, 2) Rating "
-				+"from (select a.produktid, b.produktname, rating "
-				+"from (select * from (select avg(Bewertung) Rating, produktid "
-				+"from (select * from zzz_rating where userid in ("+userliste+ ")"
-				+"and not produktid in (select produktid from zzz_rating where userid = "+userid+" and Bewertung <> 0)) "
-				+"group by produktid )where Rating > "+mindestRating+" ) a, ZZZ_Produkte b where a.produktid = b.id )) "
-				+"where Rang <= "+anzahlEmpfehlungen+" order by Rang asc"; 
-		
-		System.out.println("Empfehlungen Benutzerquery: "+query);
-		ResultSet rsEmpfehlungen = queryBean.executeQuery(query);
-		
-//		ResultSet rsEmpfehlungen = queryBean.executegetProduktempfehlungen2(userid,anzahlEmpfehlungen,userliste,mindestRating);
-		return rsEmpfehlungen;	
-	}
+
 	
 }

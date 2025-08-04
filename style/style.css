@@ -4,7 +4,7 @@ body {
     justify-content: center;
     font-family: Helvetica, sans-serif;
     color: #232323;
-    background-image: linear-gradient(#dae9f3, #e0daf5);
+    background-color: #e2e2ef;
     box-sizing: border-box;
     padding: 15px 30px;
 
@@ -39,10 +39,10 @@ form {
 }
 
 input, textarea {
-    background-image: linear-gradient(var(#93cbea), var(789cea));
+    background-image: linear-gradient(var(#93cbea), var(#789cea));
     padding: 5px;
 
-    border: 2px solid var(93cbea);
+    border: 2px solid var(#93cbea);
     border-radius: 10px;
 }
 
@@ -57,24 +57,19 @@ a:link, a:visited, a:active {
 }
 
 table {
-    width: 80%; /* Breite der Tabelle */
-    margin: 20px auto; /* Zentrierung horizontal */
-    border-collapse: collapse; /* Saubere Zellgrenzen */
-    background-color: white; /* Weißer Hintergrund */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Schatten für Sichtbarkeit */
+    width: 80%;
+    margin: 20px auto;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+    padding: 5px;
+    align-content: center;
+    display: flex;
 }
 
-table th, table td {
-    padding: 10px; /* Konsistenter Abstand in Zellen */
-    text-align: center; /* Zentrierung des Inhalts */
-    border: 1px solid #ddd; /* Dezente Zellränder */
+
+table p {
+    text-align: left;
 }
 
-table th {
-    background-color: #f0f0f0; /* Hellgrauer Header */
-    color: black; /* Schwarze Schrift */
-    font-weight: bold;
-}
 
 table#aufgabe {
     width: 90%; /* Mehr Platz für diese Tabelle */
@@ -92,6 +87,10 @@ table#aufgabe td span#date {
     text-align: center;
     margin: 0 auto;
     display: block;
+}
+
+.rating-title {
+
 }
 
 button, input[type="submit"]{
