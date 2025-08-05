@@ -1,8 +1,10 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.Serial;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import SortedList.SortedList;
 import jakarta.servlet.ServletException;
@@ -14,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
  * Servlet implementation class BewertungBean
  */
 public class BewertungBean extends HttpServlet {
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	StringBuffer sb = new StringBuffer();
@@ -50,35 +53,28 @@ public class BewertungBean extends HttpServlet {
 		
 		int countElements=0;
 		int userid = queryBean.userid;
-		String query = null;
 		sb = new StringBuffer();
 		
-		ResultSet rs=null;
-		ResultSet rs2=null;
-		
+		ResultSet rs = null;
+		ResultSet rs2 = null;
+
 		rs = queryBean.executeGetRatingList(userid, 50);
 		rs2 = queryBean.executeGetRatingCount(userid);
 
 		try {
         while(rs2.next()) {
-        	sb.append("Anzahl Bewertungen bisher: "+rs2.getString(1)+"");
+        	sb.append("Anzahl Bewertungen bisher: ").append(rs2.getString(1));
         	}
 		
-		/*
-		 * Eventuell pruefen ob schon eine Bewertung abgegeben wurde bzw. alte 
-		 * bewertung loeschen wenn User seine Meinung aendern kann
-		 * 
-		 */
-		
 		sb.append("<center><p><b>Bewertung</b></p></center>");
-		sb.append("<center>Eingeloggt mit UserID: " + userid + "</center>");
+		sb.append("<center>Eingeloggt mit UserID: ").append(userid).append("</center>");
 		sb.append("<center><FORM ACTION=\"ControllerServlet?doAction=bewertungSubmit\" METHOD=\"post\">");
 		sb.append("<table>");
 		
 			while(rs.next()) {	
 				countElements++;
 				sb.append("<tr><td>");
-				sb.append("<input type=\"hidden\" value=\""+rs.getString(1)+"\" name=\"produktid\">");
+				sb.append("<input type=\"hidden\" value=\"").append(rs.getString(1)).append("\" name=\"produktid\">");
 				sb.append(rs.getString(2));
 				sb.append("<p>");
 				sb.append(rs.getString(4));
@@ -104,16 +100,14 @@ public class BewertungBean extends HttpServlet {
 		sb.append("</table>");
 		sb.append("<input type=\"submit\" value=\"Bewerten\"></form></center>");
 		sb.append("<a href=\"ControllerServlet?doAction=logout\">Zum Logout</a>");
-		/*if (countElements>=1) {sb.append("<input type=\"submit\" value=\"Bewerten\"></form></center>");}
-		else {sb.append("<a href=\"ControllerServlet?doAction=logout\">Zum Logout</a>");}
-		*/}
+	}
 	
 
 
-	public void abgegeben(JdbcQueryBean queryBean, String[] bewertungen, String[] produktid) {
+	public void abgegeben(JdbcQueryBean queryBean, String[] bewertungen, String[] produktID) {
 		
 		int userid = queryBean.userid;
-		queryBean.executeUpdateRatings(bewertungen, produktid, userid);
+		queryBean.executeUpdateRatings(bewertungen, produktID, userid);
 		
 		sb=new StringBuffer("Bewertung erfolgreich abgegeben.");
 		
@@ -138,7 +132,8 @@ public class BewertungBean extends HttpServlet {
 		sb.append("<h1>Empfehlungen</h1>");
 		sb.append("Hier finden Sie ihre Empfehlungen!");
 		sb.append("<br>");
-		sb.append("Sie können jedoch weitere Empfehlungen <a href=\"ControllerServlet?doAction=bewertung\">hier</a> abgeben!");
+		sb.append("Sie können jedoch weitere Empfehlungen abgeben!");
+		sb.append("<a href=\"ControllerServlet?doAction=bewertung\">Weitere Bewertungen abgeben.</a>");
 		sb.append("<br><br>");
 		sb.append("<a href=\"ControllerServlet?doAction=logout\">Zum Logout</a>");
 		sb.append("<br><br>");
@@ -194,16 +189,16 @@ public class BewertungBean extends HttpServlet {
 		try {
 			ResultSet recommendations = queryBean.executeGetProductRecommendations(userID, recCount, sqlUserList, mindestRating);
 			while(recommendations.next()) {
-
 				sb.append("<tr>");
-				sb.append("<td><p style=\"font-size: 1.3em; color:black;\">"+recommendations.getString(2)+"</p></td>");
-				sb.append("<td><p style=\"font-size: 1.3em; color:blue;\">"+recommendations.getString(4)+"</p></td>");
+				sb.append("<td><p>"+recommendations.getString(2)+" (CF)</p></td>");
+				sb.append("<td><p>"+recommendations.getString(4)+"</p></td>");
 				sb.append("</tr>");
-
 			}
 		} catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+		sb.append(contentRecommendations(queryBean));
 
         sb.append("</table></center>");
 		return sb.toString();
@@ -245,7 +240,6 @@ public class BewertungBean extends HttpServlet {
 		
 		int userid = queryBean.userid;
 		int anzahlBewertungen = 0;
-		String query = null;
 		
 		try {
 			System.out.println("Bewertungen abgegeben für UserID " + userid);
@@ -255,12 +249,56 @@ public class BewertungBean extends HttpServlet {
 				anzahlBewertungen = anzahlrs.getInt(1);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		return anzahlBewertungen;
 	}
 
-	
+	public String contentRecommendations(JdbcQueryBean queryBean) {
+		int userID = queryBean.userid;
+		int minRatingCount = 5;
+		StringBuilder sb = new StringBuilder();
+		ArrayList<String[]> recs = new ArrayList<>();
+
+		try {
+			ResultSet rs = queryBean.executeGetContentBasedRecs(userID, minRatingCount);
+
+			while (rs.next()) {
+				String recommendation = rs.getString(1);
+				String source = rs.getString(2);
+
+				String[] recCombo;
+
+				if (recs.isEmpty()) {
+					recCombo = new String[] { recommendation, source };
+					recs.add(recCombo);
+				} else {
+					String[] currRecCombo = recs.get(recs.size() - 1);
+					if (currRecCombo[0].equals(recommendation)) {
+						if (currRecCombo[1].split(",").length < 2) {
+							currRecCombo[1] = currRecCombo[1] + ", " + source;
+
+						} else if (!currRecCombo[1].contains("und weitere...")) {
+							currRecCombo[1] = currRecCombo[1] + " und weitere...";
+						}
+
+					} else {
+						recCombo = new String[]{recommendation, source};
+						recs.add(recCombo);
+					}
+				}
+			}
+		} catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+		for (String[] recCombo : recs) {
+			sb.append("<tr>");
+			sb.append("<td><p>" + recCombo[0] + " (CN)</p></td>");
+			sb.append("<td><p> Empfehlung basiert auf: " + recCombo[1] + "</p></td>");
+			sb.append("</tr>");
+		}
+
+		return sb.toString();
+    }
 }

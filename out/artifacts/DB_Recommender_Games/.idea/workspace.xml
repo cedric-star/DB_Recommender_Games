@@ -9,49 +9,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="201da4e9-997d-43f6-8254-f5f70575bde5" name="Changes" comment="Kleine CSS-Änderungen und künftiger Umbau der .jsps">
-      <change beforePath="$PROJECT_DIR$/.idea/DB_Recommender_Games.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DB_Recommender_Games.iml" afterDir="false" />
+    <list default="true" id="201da4e9-997d-43f6-8254-f5f70575bde5" name="Changes" comment="Vollständiger Umbau des gesamten Projets und aller Queries; kleine HTML-Anpassungen.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WEB-INF/classes/servlets/BewertungBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/servlets/BewertungBean.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WEB-INF/classes/servlets/BewertungBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/servlets/BewertungBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/servlets/ControllerServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/servlets/ControllerServlet.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WEB-INF/classes/servlets/JdbcQueryBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/servlets/JdbcQueryBean.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WEB-INF/classes/servlets/JdbcQueryBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/servlets/JdbcQueryBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/utility/CollaborativeProcessing.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/utility/CollaborativeProcessing.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/utility/DevTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/utility/DevTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/utility/DevTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/utility/DevTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/utility/QueryReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/utility/QueryReader.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WEB-INF/classes/utility/queries.properties" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/utility/queries.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/.idea/DB_Recommender_Games.iml" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/.idea/DB_Recommender_Games.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/servlets/BewertungBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/servlets/BewertungBean.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/servlets/BewertungBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/servlets/BewertungBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/servlets/ControllerServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/servlets/ControllerServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/servlets/ControllerServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/servlets/ControllerServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/servlets/JdbcQueryBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/servlets/JdbcQueryBean.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/servlets/JdbcQueryBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/servlets/JdbcQueryBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/servlets/LoginBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/servlets/LoginBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/servlets/RegisterBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/servlets/RegisterBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/utility/CollaborativeProcessing.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/utility/CollaborativeProcessing.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/utility/DevTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/utility/DevTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/utility/DevTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/utility/DevTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/utility/QueryReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/utility/QueryReader.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/utility/queries.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/utility/queries.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/lib/jsp-api.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/lib/jsp-api.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/lib/servlet-api.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/lib/servlet-api.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/database/seed.sql" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/database/seed.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/jsp/Error.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/jsp/Error.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/jsp/bewertung.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/jsp/bewertung.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/jsp/empfehlung.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/jsp/empfehlung.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/jsp/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/jsp/login.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/jsp/register.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/jsp/register.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/style/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/style/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/style/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -271,7 +241,11 @@
       <workItem from="1754329224481" duration="2639000" />
       <workItem from="1754331913749" duration="365000" />
       <workItem from="1754332411143" duration="3394000" />
-      <workItem from="1754336313210" duration="313000" />
+      <workItem from="1754336313210" duration="3338000" />
+      <workItem from="1754376357157" duration="3792000" />
+      <workItem from="1754386719472" duration="858000" />
+      <workItem from="1754396662700" duration="10779000" />
+      <workItem from="1754413067010" duration="2531000" />
     </task>
     <task id="LOCAL-00001" summary="First commit of new branch">
       <option name="closed" value="true" />
@@ -305,7 +279,15 @@
       <option name="project" value="LOCAL" />
       <updated>1754178796017</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Vollständiger Umbau des gesamten Projets und aller Queries; kleine HTML-Anpassungen.">
+      <option name="closed" value="true" />
+      <created>1754337152232</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1754337152232</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -316,6 +298,7 @@
     <MESSAGE value="Class Building Fixed" />
     <MESSAGE value="README update und weitere Tests" />
     <MESSAGE value="Kleine CSS-Änderungen und künftiger Umbau der .jsps" />
-    <option name="LAST_COMMIT_MESSAGE" value="Kleine CSS-Änderungen und künftiger Umbau der .jsps" />
+    <MESSAGE value="Vollständiger Umbau des gesamten Projets und aller Queries; kleine HTML-Anpassungen." />
+    <option name="LAST_COMMIT_MESSAGE" value="Vollständiger Umbau des gesamten Projets und aller Queries; kleine HTML-Anpassungen." />
   </component>
 </project>

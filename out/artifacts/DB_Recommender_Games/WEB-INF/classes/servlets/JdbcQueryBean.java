@@ -33,6 +33,10 @@ public class JdbcQueryBean extends HttpServlet {
 	private PreparedStatement ps_getSimilarUsers = null;
 	private PreparedStatement ps_getProductRecommendations = null;
 	private PreparedStatement ps_getBeliebteProdukte = null;
+	private PreparedStatement ps_getUnratedProducts = null;
+	private PreparedStatement ps_getLikedProducts = null;
+	private PreparedStatement ps_getContentBasedRecs = null;
+	private PreparedStatement ps_initRatingsNewProducts = null;
 
 	boolean logged = false;
 
@@ -75,6 +79,10 @@ public class JdbcQueryBean extends HttpServlet {
 			ps_getSimilarUsers = connection.prepareStatement(QueryReader.getQuery("getSimilarUsers"));
 			ps_getProductRecommendations = connection.prepareStatement(QueryReader.getQuery("getProductRecommendations"));
 			ps_getBeliebteProdukte = connection.prepareStatement(QueryReader.getQuery("getPopularProducts"));
+			ps_getLikedProducts = connection.prepareStatement(QueryReader.getQuery("getLikedProducts"));
+			ps_getUnratedProducts = connection.prepareStatement(QueryReader.getQuery("getUnratedProducts"));
+			ps_getContentBasedRecs = connection.prepareStatement(QueryReader.getQuery("getContentBasedRecs"));
+			ps_initRatingsNewProducts = connection.prepareStatement(QueryReader.getQuery("initRatingsNewProducts"));
 		} catch (SQLException e) {
 			System.err.println("Error occured during fetching of SQL Statements: ");
 			System.err.println(e.getMessage());
@@ -84,16 +92,6 @@ public class JdbcQueryBean extends HttpServlet {
 	public String getResult() {
 		return result;
 	}
-
-	/*
-	protected void finalize() {
-		try {
-			connection.close();
-			statement.close();
-		} catch (SQLException e) {
-		}
-	}
- */
 
 	/**
 	 * Executes a query on the blank_future database. The results are given as a resultset.
@@ -149,6 +147,27 @@ public class JdbcQueryBean extends HttpServlet {
 	public boolean login(String user, String pass, LoginBean loginBean) {
 
 		boolean logged = baseLogin(user, pass);
+		int userID = 0;
+
+        try {
+			ps_getUserid.setString(1, user);
+			ResultSet rs = ps_getUserid.executeQuery();
+			while (rs.next()) {
+				userID = Integer.parseInt(rs.getString(1));
+			}
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        if (logged && userID != 0) {
+			try {
+				ps_initRatingsNewProducts.setInt(1, userID);
+				ps_initRatingsNewProducts.setInt(2, userID);
+				ps_initRatingsNewProducts.executeQuery();
+			} catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
 		loginBean.logged = logged;
 		return logged;
 	}
@@ -289,43 +308,20 @@ public class JdbcQueryBean extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-		/*
-		try {
-			ps_getProductRecommendations.setString(1, userList);
-			ps_getProductRecommendations.setInt(2, userID);
-			ps_getProductRecommendations.setInt(3, minRating);
-			ps_getProductRecommendations.setInt(4, recCount);
-			System.out.println("Recs: "+ ps_getProductRecommendations.toString());
-			rs = ps_getProductRecommendations.executeQuery();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		 */
 		return rs;
 	}
 
-	public ResultSet executegetProduktempfehlungen2(String userid, int anzahlEmpfehlungen, String userliste, double mindestRating) {
-		ResultSet rs = null;
-		System.out.println("userliste: "+userliste);
-		System.out.println("userid: "+userid);
-		System.out.println("mindestRating: "+mindestRating);
-		System.out.println("anzahlEmpfehlungen: "+anzahlEmpfehlungen);
-		String sql2 = "select * from (select produktid, produktname, dense_rank () over (order by rating desc) Rang, round (Rating, 2) Rating " +
-				"from (select a.produktid, b.produktname, rating " +
-				"from (select * from (select avg(Bewertung) Rating, produktid " +
-				"from (select * from ZZZ_RATING where userid in ("+userliste+") " +
-				"and not produktid in (select produktid from ZZZ_RATING where userid = "+userid+" and Bewertung <> 0)) " +
-				"group by produktid ) where Rating > "+mindestRating+" ) a, ZZZ_Produkte b where a.produktid = b.produktid )) " +
-				"where Rang <= "+anzahlEmpfehlungen+" order by Rang asc";
+	public ResultSet executeGetContentBasedRecs(int userID, int minRating) {
+		ResultSet results = null;
 		try {
-			System.out.println("prod: "+ ps_getProductRecommendations.toString());
-			rs = statement.executeQuery(sql2);
+			ps_getContentBasedRecs.setInt(1, userID);
+			ps_getContentBasedRecs.setInt(2, minRating);
+			ps_getContentBasedRecs.setInt(3, userID);
+			results = ps_getContentBasedRecs.executeQuery();
 		} catch (SQLException e) {
-
 			e.printStackTrace();
 		}
-		return rs;
+		return results;
 	}
 
 }
