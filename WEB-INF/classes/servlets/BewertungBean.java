@@ -124,7 +124,7 @@ public class BewertungBean extends HttpServlet {
 		int userid = queryBean.userid;
 		sb = new StringBuffer();
 		double minAehnlichkeit = 0.2;
-		int benoetigteAnzahl = 5;
+		int benoetigteAnzahl = 10;
 		SortedList similarUserList = new SortedList();
 		String[] median = null;
 		ResultSet aehnliche = null;

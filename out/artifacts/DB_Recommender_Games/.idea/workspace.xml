@@ -9,19 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="201da4e9-997d-43f6-8254-f5f70575bde5" name="Changes" comment="Vollständiger Umbau des gesamten Projets und aller Queries; kleine HTML-Anpassungen.">
+    <list default="true" id="201da4e9-997d-43f6-8254-f5f70575bde5" name="Changes" comment="Final 1.0 Push Backend">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/servlets/BewertungBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/servlets/BewertungBean.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WEB-INF/classes/servlets/BewertungBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/servlets/BewertungBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/servlets/JdbcQueryBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/servlets/JdbcQueryBean.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/servlets/JdbcQueryBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/servlets/JdbcQueryBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WEB-INF/classes/utility/PasswordProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/utility/PasswordProcessor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WEB-INF/classes/utility/queries.properties" beforeDir="false" afterPath="$PROJECT_DIR$/WEB-INF/classes/utility/queries.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/servlets/BewertungBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/servlets/BewertungBean.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/servlets/BewertungBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/servlets/BewertungBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/servlets/JdbcQueryBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/servlets/JdbcQueryBean.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/servlets/JdbcQueryBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/servlets/JdbcQueryBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/utility/queries.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/WEB-INF/classes/utility/queries.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -245,7 +238,8 @@
       <workItem from="1754376357157" duration="3792000" />
       <workItem from="1754386719472" duration="858000" />
       <workItem from="1754396662700" duration="10779000" />
-      <workItem from="1754413067010" duration="2531000" />
+      <workItem from="1754413067010" duration="5024000" />
+      <workItem from="1754469897408" duration="8897000" />
     </task>
     <task id="LOCAL-00001" summary="First commit of new branch">
       <option name="closed" value="true" />
@@ -287,7 +281,15 @@
       <option name="project" value="LOCAL" />
       <updated>1754337152232</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Final 1.0 Push Backend">
+      <option name="closed" value="true" />
+      <created>1754424285629</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1754424285629</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -299,6 +301,7 @@
     <MESSAGE value="README update und weitere Tests" />
     <MESSAGE value="Kleine CSS-Änderungen und künftiger Umbau der .jsps" />
     <MESSAGE value="Vollständiger Umbau des gesamten Projets und aller Queries; kleine HTML-Anpassungen." />
-    <option name="LAST_COMMIT_MESSAGE" value="Vollständiger Umbau des gesamten Projets und aller Queries; kleine HTML-Anpassungen." />
+    <MESSAGE value="Final 1.0 Push Backend" />
+    <option name="LAST_COMMIT_MESSAGE" value="Final 1.0 Push Backend" />
   </component>
 </project>
