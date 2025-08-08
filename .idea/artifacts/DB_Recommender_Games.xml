@@ -1,8 +1,8 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="DB_Recommender_Games">
+  <artifact type="war" name="DB_Recommender_Games">
     <output-path>$PROJECT_DIR$/out/artifacts/DB_Recommender_Games</output-path>
-    <root id="root">
-      <element id="dir-copy" path="$PROJECT_DIR$" />
+    <root id="archive" name="DB_Recommender_Games.war">
+      <element id="artifact" artifact-name="DB_Recommender_Games_Exploded" />
     </root>
   </artifact>
 </component>

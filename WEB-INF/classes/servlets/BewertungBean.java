@@ -5,6 +5,8 @@ import java.io.Serial;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import SortedList.SortedList;
 import jakarta.servlet.ServletException;
@@ -58,7 +60,7 @@ public class BewertungBean extends HttpServlet {
 		ResultSet rs = null;
 		ResultSet rs2 = null;
 
-		rs = queryBean.executeGetRatingList(userid, 50);
+		rs = queryBean.executeGetRatingList(userid, 5);
 		rs2 = queryBean.executeGetRatingCount(userid);
 
 		try {
@@ -74,8 +76,8 @@ public class BewertungBean extends HttpServlet {
 			while(rs.next()) {	
 				countElements++;
 				sb.append("<tr><td>");
-				sb.append("<input type=\"hidden\" value=\"").append(rs.getString(1)).append("\" name=\"produktid\">");
-				sb.append(rs.getString(2));
+				sb.append("<input type=\"hidden\" value=\"" + rs.getString(1) + "\" name=\"produktid\">");
+				sb.append(rs.getString(2) + " - " + rs.getString(6));
 				sb.append("<p>");
 				sb.append(rs.getString(4));
 				sb.append("</td><td><select name=\"bewertung\">" +
@@ -142,21 +144,41 @@ public class BewertungBean extends HttpServlet {
 
 		fillSimilarUserList(aehnliche, similarUserList);
 
+		sb.append(showRecBasics());
+
+		sb.append(contentRecommendations(queryBean));
+
         if (!similarUserList.isEmpty()) {
             System.out.println("Liste Groesse: "+similarUserList.size());
             if (similarUserList.size() >= benoetigteAnzahl) {
-                sb.append(showUserRecs(queryBean, similarUserList, userid, benoetigteAnzahl));
-            } else {
-                sb.append("Wir haben leider keine Empfehlungen für Sie. Schauen Sie später nochmal vorbei!");
+                sb.append(showCollaborativeUserRecs(queryBean, similarUserList, userid, benoetigteAnzahl));
             }
-        } else {
-            sb.append(showGreySheepRecs(queryBean));
         }
+
+		sb.append("</table></center>");
+
+		sb.append(showPopularProducts(queryBean));
 
         similarUserList.clearList();
     }
 
-	public String showUserRecs(JdbcQueryBean queryBean, SortedList similarUserList, int userID, int recCount) {
+	public String showRecBasics() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<center><table width=\"80%;\">");
+		sb.append("<tr><td colspan=\"2\">");
+		sb.append("<p style=\"text-align: center; font-size: 1.5em; color:red; font-weight: bold;\">");
+		sb.append("Dies sollten Sie sich unbedingt anschauen!</p>");
+		sb.append("</td></tr>");
+		sb.append("<tr><td>");
+		sb.append("<p><u class=\"rating-table\">Empfehlungen</u></p></td>");
+		sb.append("<td><p><u class=\"rating-table\">Bewertung/Ähnliche Produkte</u></p>");
+		sb.append("</td></tr>");
+
+		return sb.toString();
+	}
+
+	public String showCollaborativeUserRecs(JdbcQueryBean queryBean, SortedList similarUserList, int userID, int recCount) {
 
 		int mindestRating = 5;
 		String sqlUserList = "";
@@ -176,46 +198,46 @@ public class BewertungBean extends HttpServlet {
 		System.out.println("Ähnliche User Anzahl: " + similarUserList.size());
 		System.out.println("Ähnliche User: " + sqlUserList);
 
-		sb.append("<center><table width=\"80%;\">");
-		sb.append("<tr><td colspan=\"2\">");
-		sb.append("<p style=\"text-align: center; font-size: 1.5em; color:red; font-weight: bold;\">");
-		sb.append("Dies sollten Sie sich unbedingt anschauen!</p>");
-		sb.append("</td></tr>");
-		sb.append("<tr><td>");
-		sb.append("<p><u class=\"rating-table\">Empfehlungen</u></p></td>");
-		sb.append("<td><p><u class=\"rating-table\">Bewertung</u></p>");
-		sb.append("</td></tr>");
-
 		try {
 			ResultSet recommendations = queryBean.executeGetProductRecommendations(userID, recCount, sqlUserList, mindestRating);
 			while(recommendations.next()) {
 				sb.append("<tr>");
-				sb.append("<td><p>"+recommendations.getString(2)+" (CF)</p></td>");
-				sb.append("<td><p>"+recommendations.getString(4)+"</p></td>");
+				sb.append("<td><p>" + recommendations.getString(2) + " - " + recommendations.getString(5) + " (CF)</p></td>");
+				sb.append("<td><p>" + recommendations.getString(4) + "</p></td>");
 				sb.append("</tr>");
 			}
 		} catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-		sb.append(contentRecommendations(queryBean));
-
-        sb.append("</table></center>");
 		return sb.toString();
 	}
 
-	public String showGreySheepRecs(JdbcQueryBean queryBean) {
+	public String showPopularProducts(JdbcQueryBean queryBean) {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("Du bist ein graues Schaf. Niemand ist dir ähnlich.");
-		sb.append("Trotzdem kannst du dir natürlich gerne die beliebten Produkte ansehen...");
+		sb.append("<center><table width=\"80%;\">");
+		sb.append("<tr><td colspan=\"3\">");
+		sb.append("<p style=\"text-align: center; font-size: 1.2em; font-weight: bold;\">");
+		sb.append("Nichts gefunden, dass Ihnen gefällt? Schauen Sie sich die beliebtesten Produkte an!</p>");
+		sb.append("</td></tr>");
+		sb.append("<tr>");
+		sb.append("<td><p><u class=\"rating-table\">Platzierung</u></p></td>");
+		sb.append("<td><p><u class=\"rating-table\">Empfehlung</u></p></td>");
+		sb.append("<td><p><u class=\"rating-table\">Beschreibung</u></p></td>");
+		sb.append("</tr>");
+
 		try {
 			ResultSet popularProducts = queryBean.executeGetBeliebteProdukte();
+			int num = 1;
 			while(popularProducts.next())
 			{
 				sb.append("<tr>");
-				sb.append("<td><p style=\"font-size: 1.3em; color:black;\">"+popularProducts.getString(1)+"</p></td>");
+				sb.append("<td><p>" + num + "</p></td>");
+				sb.append("<td><p>"+popularProducts.getString(1)+"</p></td>");
+				sb.append("<td><p>"+popularProducts.getString(2)+"</p></td>");
 				sb.append("</tr>");
+				num += 1;
 			}
 		} catch (SQLException e) {
             throw new RuntimeException(e);
@@ -258,6 +280,7 @@ public class BewertungBean extends HttpServlet {
 	public String contentRecommendations(JdbcQueryBean queryBean) {
 		int userID = queryBean.userid;
 		int minRatingCount = 5;
+		int contentRecAmount = 10;
 		StringBuilder sb = new StringBuilder();
 		ArrayList<String[]> recs = new ArrayList<>();
 
@@ -267,24 +290,25 @@ public class BewertungBean extends HttpServlet {
 			while (rs.next()) {
 				String recommendation = rs.getString(1);
 				String source = rs.getString(2);
+				String creator = rs.getString(3);
 
 				String[] recCombo;
 
 				if (recs.isEmpty()) {
-					recCombo = new String[] { recommendation, source };
+					recCombo = new String[] { recommendation, source, creator };
 					recs.add(recCombo);
 				} else {
 					String[] currRecCombo = recs.get(recs.size() - 1);
 					if (currRecCombo[0].equals(recommendation)) {
-						if (currRecCombo[1].split(",").length < 2) {
+						if (currRecCombo[1].split(",").length < 5) {
 							currRecCombo[1] = currRecCombo[1] + ", " + source;
 
-						} else if (!currRecCombo[1].contains("und weitere...")) {
+						} else if (!currRecCombo[1].contains("und weitere...") && currRecCombo[1].split(",").length >= 5) {
 							currRecCombo[1] = currRecCombo[1] + " und weitere...";
 						}
 
 					} else {
-						recCombo = new String[]{recommendation, source};
+						recCombo = new String[]{recommendation, source, creator};
 						recs.add(recCombo);
 					}
 				}
@@ -292,9 +316,28 @@ public class BewertungBean extends HttpServlet {
 		} catch (SQLException e) {
             throw new RuntimeException(e);
         }
-		for (String[] recCombo : recs) {
+
+		recs.sort(Comparator.comparingInt(array -> array[1].split(",").length));
+		Collections.reverse(recs);
+
+		System.out.println("All recs: ");
+		for (String[] rec : recs) {
+			System.out.println("Rec: " + rec[0] + " with " + rec[1].split(",").length);
+		}
+
+		ArrayList<String[]> finalRecs = new ArrayList<>();
+
+		for (int i = 0; i < recs.size(); i++) {
+			System.out.println("Rec: " + recs.get(i)[0] + " with " + recs.get(i)[1].split(",").length);
+			if (i < contentRecAmount) {
+				finalRecs.add(recs.get(i));
+				System.out.println("Final Rec: " + recs.get(i)[0] + " with " + recs.get(i)[1].split(",").length);
+			}
+		}
+
+		for (String[] recCombo : finalRecs) {
 			sb.append("<tr>");
-			sb.append("<td><p>" + recCombo[0] + " (CN)</p></td>");
+			sb.append("<td><p>" + recCombo[0] + " - " + recCombo[2] + " (CN)</p></td>");
 			sb.append("<td><p> Empfehlung basiert auf: " + recCombo[1] + "</p></td>");
 			sb.append("</tr>");
 		}

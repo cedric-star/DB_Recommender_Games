@@ -15,9 +15,9 @@
     <h1>Nutzerregistrierung</h1>
     <br>
     <FORM ACTION="ControllerServlet?doAction=sendRegisterData" METHOD="POST">
-        <P>MyBenutzername<BR>
+        <P>Benutzername<BR>
             <INPUT TYPE="TEXT" NAME="username"  SIZE="30" MAXLENGTH="30"></P>
-        <P>MyPasswort<BR>
+        <P>Passwort<BR>
             <INPUT TYPE="password" NAME="password" SIZE="30" MAXLENGTH="30"></P>
         <INPUT TYPE="submit" VALUE="Registrieren">
     </FORM>

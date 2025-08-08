@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="exploded-war" name="DB_Recommender_Games">
-    <output-path>$PROJECT_DIR$/out/artifacts/DB_Recommender_Games</output-path>
-    <root id="root">
-      <element id="dir-copy" path="$PROJECT_DIR$" />
-    </root>
-  </artifact>
-</component>
