@@ -52,7 +52,7 @@ public class BewertungBean extends HttpServlet {
 
 
 	public void showElements(JdbcQueryBean queryBean) {
-		
+
 		int countElements=0;
 		int userid = queryBean.userid;
 		sb = new StringBuffer();
@@ -101,7 +101,7 @@ public class BewertungBean extends HttpServlet {
 		sb.append("<input type=\"hidden\" value="+countElements+" name=\"countElements\" >");
 		sb.append("</table>");
 		sb.append("<input type=\"submit\" value=\"Bewerten\"></form></center>");
-		sb.append("<a href=\"ControllerServlet?doAction=logout\">Zum Logout</a>");
+		sb.append("<a class=\"result-text\" href=\"ControllerServlet?doAction=logout\">Zum Logout</a>");
 	}
 	
 
@@ -132,12 +132,12 @@ public class BewertungBean extends HttpServlet {
 		ResultSet aehnliche = null;
 
 		sb.append("<h1>Empfehlungen</h1>");
-		sb.append("Hier finden Sie ihre Empfehlungen!");
+		sb.append("<a class=\"result-text\"> Hier finden Sie ihre Empfehlungen! </a>");
 		sb.append("<br>");
-		sb.append("Sie können jedoch weitere Empfehlungen abgeben!");
-		sb.append("<a href=\"ControllerServlet?doAction=bewertung\">Weitere Bewertungen abgeben.</a>");
+		sb.append("<a class=\"result-text\"> Sie können jedoch weitere Empfehlungen abgeben!</a>");
+		sb.append("<a class=\"simple-link\" href=\"ControllerServlet?doAction=bewertung\">Weitere Bewertungen abgeben.</a>");
 		sb.append("<br><br>");
-		sb.append("<a href=\"ControllerServlet?doAction=logout\">Zum Logout</a>");
+		sb.append("<a class=\"simple-link\" href=\"ControllerServlet?doAction=logout\">Zum Logout</a>");
 		sb.append("<br><br>");
 
 		aehnliche = queryBean.executeGetSimilarUsers(String.valueOf(userid), minAehnlichkeit);
@@ -200,6 +200,9 @@ public class BewertungBean extends HttpServlet {
 
 		try {
 			ResultSet recommendations = queryBean.executeGetProductRecommendations(userID, recCount, sqlUserList, mindestRating);
+			if (recommendations == null) {
+				System.out.println("Es ist NULL");
+			}
 			while(recommendations.next()) {
 				sb.append("<tr>");
 				sb.append("<td><p>" + recommendations.getString(2) + " - " + recommendations.getString(5) + " (CF)</p></td>");
@@ -242,7 +245,7 @@ public class BewertungBean extends HttpServlet {
 		} catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        sb.append("<a href=\"ControllerServlet?doAction=logout\">Zum Logout</a>");
+        sb.append("<a class=\"simple-link\" href=\"ControllerServlet?doAction=logout\">Zum Logout</a>");
 		return sb.toString();
 	}
 

@@ -299,8 +299,8 @@ public class JdbcQueryBean extends HttpServlet {
 				"SELECT * FROM CCJ_RATING_GENERAL WHERE USERID in (" + userList + ") AND NOT PRODUCTID in (" +
 				"SELECT PRODUCTID FROM CCJ_RATING_GENERAL WHERE USERID = " + userID + " AND RATING <> 0)) GROUP BY PRODUCTID) where AvgRating > " + minRating + ") " +
 				"SELECT * FROM (" +
-				"SELECT PRODUCTID, PRODUCTNAME, dense_rank () over (order by AvgRating desc) rank, round (AvgRating, 2) Rating FROM (" +
-				"SELECT avgs.PRODUCTID, prods.PRODUCTNAME, AvgRating FROM PRODUCT_AVERAGE_GT avgs, CCJ_PRODUCTS prods where avgs.PRODUCTID = prods.PRODUCTID)) WHERE rank <= " + recCount + " ORDER BY rank ASC";
+				"SELECT PRODUCTID, PRODUCTNAME, dense_rank () over (order by AvgRating desc) rank, round (AvgRating, 2) Rating, CREATOR FROM (" +
+				"SELECT avgs.PRODUCTID, prods.PRODUCTNAME, AvgRating, prods.CREATOR FROM PRODUCT_AVERAGE_GT avgs, CCJ_PRODUCTS prods where avgs.PRODUCTID = prods.PRODUCTID)) WHERE rank <= " + recCount + " ORDER BY rank ASC";
 
         try {
             rs = statement.executeQuery(getProductRecommendations);
