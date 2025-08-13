@@ -120,10 +120,15 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
     font-size: 18px;
 }
 
+.result-text-big {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #E3E6E6;
+}
+
 .result-text {
     font-size: 1rem;
     color: #E3E6E6;
-    text-align: center;
 }
 
 .text-white-large {
@@ -142,9 +147,43 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
     border-radius: 50px;
     align-content: center;
     text-align: center;
+    margin: 50px;
 }
 
 .subtitle-text {
     color: #131921;
     font-size: 1.2rem;
+}
+
+.rating-table-header {
+    color: #227CCF;
+    font-size: 1.5rem;
+    font-weight: bolder;
+}
+
+table, th, td {
+    border: 1px solid #f3a847;
+    background-color: #1a2738;
+}
+
+td {
+    padding: 10px;
+}
+
+table {
+    border: 15px solid #f3a847;
+    border-spacing: 0;
+    border-collapse: separate;
+    border-radius: 30px;
+    margin: 35px;
+}
+
+.my-select {
+    position: relative;
+    background-color: #d5dfdf;
+    border: #f3a847 3px solid;
+    border-radius: 3px;
+    color: #1a2738;
+    font-size: 1.5rem;
+    padding: 5px;
 }

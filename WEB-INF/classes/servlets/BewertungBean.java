@@ -64,23 +64,28 @@ public class BewertungBean extends HttpServlet {
 		rs2 = queryBean.executeGetRatingCount(userid);
 
 		try {
-        while(rs2.next()) {
-        	sb.append("Anzahl Bewertungen bisher: ").append(rs2.getString(1));
+
+			sb.append("<div class=\"input-area\">");
+			sb.append("<center><p class=\"login-title\">Bewertung</p></center>");
+			sb.append("<p class=\"text-dark-large\">Geben Sie Bewertungen zu Produkten ab,\num (verbesserte) Empfehlungen zu erhalten!</p>");
+
+        	while(rs2.next()) {
+        		sb.append("<p class=\"text-dark-large\">Anzahl Bewertungen bisher: ").append(rs2.getString(1)).append("</p>");
         	}
-		
-		sb.append("<center><p><b>Bewertung</b></p></center>");
-		sb.append("<center>Eingeloggt mit UserID: ").append(userid).append("</center>");
-		sb.append("<center><FORM ACTION=\"ControllerServlet?doAction=bewertungSubmit\" METHOD=\"post\">");
-		sb.append("<table>");
-		
+			sb.append("<p class=\"text-dark-large\">Eingeloggt mit UserID: ").append(userid).append("</p>");
+			sb.append("<center><FORM ACTION=\"ControllerServlet?doAction=bewertungSubmit\" METHOD=\"post\">");
+			sb.append("</div>");
+
+			sb.append("<table>");
 			while(rs.next()) {	
 				countElements++;
 				sb.append("<tr><td>");
 				sb.append("<input type=\"hidden\" value=\"" + rs.getString(1) + "\" name=\"produktid\">");
-				sb.append(rs.getString(2) + " - " + rs.getString(6));
-				sb.append("<p>");
+				sb.append("<p class=\"result-text-big\">" + rs.getString(2) + " - " + rs.getString(6) + "</p>");
+				sb.append("<p class=\"result-text\">");
 				sb.append(rs.getString(4));
-				sb.append("</td><td><select name=\"bewertung\">" +
+				sb.append("</p>");
+				sb.append("</td><td><select class=\"my-select\" name=\"bewertung\">" +
 						"<option>"+rs.getString(3)+"</option>" +
 						"<option>1</option>" +
 						"<option>2</option>" +
@@ -131,13 +136,17 @@ public class BewertungBean extends HttpServlet {
 		String[] median = null;
 		ResultSet aehnliche = null;
 
-		sb.append("<h1>Empfehlungen</h1>");
-		sb.append("<a class=\"result-text\"> Hier finden Sie ihre Empfehlungen! </a>");
+		sb.append("<div class=\"input-area\">");
+		sb.append("<h1 class=\"login-title\">Empfehlungen</h1>");
+		sb.append("<a class=\"subtitle-text\"> Hier finden Sie ihre Empfehlungen! </a>");
 		sb.append("<br>");
-		sb.append("<a class=\"result-text\"> Sie können jedoch weitere Empfehlungen abgeben!</a>");
+		sb.append("<a class=\"subtitle-text\"> Sie können jedoch weitere Empfehlungen abgeben!</a>");
+		sb.append("<br>");
 		sb.append("<a class=\"simple-link\" href=\"ControllerServlet?doAction=bewertung\">Weitere Bewertungen abgeben.</a>");
-		sb.append("<br><br>");
+		sb.append("<br>");
+		sb.append("<br>");
 		sb.append("<a class=\"simple-link\" href=\"ControllerServlet?doAction=logout\">Zum Logout</a>");
+		sb.append("</div>");
 		sb.append("<br><br>");
 
 		aehnliche = queryBean.executeGetSimilarUsers(String.valueOf(userid), minAehnlichkeit);
@@ -156,6 +165,7 @@ public class BewertungBean extends HttpServlet {
         }
 
 		sb.append("</table></center>");
+		sb.append("</div>");
 
 		sb.append(showPopularProducts(queryBean));
 
@@ -165,14 +175,14 @@ public class BewertungBean extends HttpServlet {
 	public String showRecBasics() {
 		StringBuilder sb = new StringBuilder();
 
+		sb.append("<div class=\"table-area\">");
 		sb.append("<center><table width=\"80%;\">");
 		sb.append("<tr><td colspan=\"2\">");
-		sb.append("<p style=\"text-align: center; font-size: 1.5em; color:red; font-weight: bold;\">");
-		sb.append("Dies sollten Sie sich unbedingt anschauen!</p>");
+		sb.append("<h1 class=\"login-title\">Dies sollten Sie sich unbedingt anschauen!</h1>");
 		sb.append("</td></tr>");
-		sb.append("<tr><td>");
-		sb.append("<p><u class=\"rating-table\">Empfehlungen</u></p></td>");
-		sb.append("<td><p><u class=\"rating-table\">Bewertung/Ähnliche Produkte</u></p>");
+		sb.append("<tr>");
+		sb.append("<td><p class=\"rating-table-header\">Empfehlungen</p></td>");
+		sb.append("<td><p class=\"rating-table-header\">Bewertung/Ähnliche Produkte</p>");
 		sb.append("</td></tr>");
 
 		return sb.toString();
@@ -202,8 +212,8 @@ public class BewertungBean extends HttpServlet {
 			ResultSet recommendations = queryBean.executeGetProductRecommendations(userID, recCount, sqlUserList, mindestRating);
 			while(recommendations.next()) {
 				sb.append("<tr>");
-				sb.append("<td><p>" + recommendations.getString(2) + " - " + recommendations.getString(5) + " (CF)</p></td>");
-				sb.append("<td><p>" + recommendations.getString(4) + "</p></td>");
+				sb.append("<td><p class=\"result-text-big\">" + recommendations.getString(2) + " - " + recommendations.getString(5) + " (CF)</p></td>");
+				sb.append("<td><p class=\"result-text\">" + recommendations.getString(4) + "</p></td>");
 				sb.append("</tr>");
 			}
 		} catch (SQLException e) {
@@ -216,15 +226,15 @@ public class BewertungBean extends HttpServlet {
 	public String showPopularProducts(JdbcQueryBean queryBean) {
 		StringBuilder sb = new StringBuilder();
 
+		sb.append("<div class=\"table-area\">");
 		sb.append("<center><table width=\"80%;\">");
 		sb.append("<tr><td colspan=\"3\">");
-		sb.append("<p style=\"text-align: center; font-size: 1.2em; font-weight: bold;\">");
-		sb.append("Nichts gefunden, dass Ihnen gefällt? Schauen Sie sich die beliebtesten Produkte an!</p>");
+		sb.append("<p class=\"login-title\">Nichts gefunden, das Ihnen gefällt? Schauen Sie sich die beliebtesten Produkte an!</p>");
 		sb.append("</td></tr>");
 		sb.append("<tr>");
-		sb.append("<td><p><u class=\"rating-table\">Platzierung</u></p></td>");
-		sb.append("<td><p><u class=\"rating-table\">Empfehlung</u></p></td>");
-		sb.append("<td><p><u class=\"rating-table\">Beschreibung</u></p></td>");
+		sb.append("<td><p class=\"rating-table-header\">Platzierung</p></td>");
+		sb.append("<td><p class=\"rating-table-header\">Empfehlung</p></td>");
+		sb.append("<td><p class=\"rating-table-header\">Beschreibung</p></td>");
 		sb.append("</tr>");
 
 		try {
@@ -233,16 +243,18 @@ public class BewertungBean extends HttpServlet {
 			while(popularProducts.next())
 			{
 				sb.append("<tr>");
-				sb.append("<td><p>" + num + "</p></td>");
-				sb.append("<td><p>"+popularProducts.getString(1)+"</p></td>");
-				sb.append("<td><p>"+popularProducts.getString(2)+"</p></td>");
+				sb.append("<td class=\"result-text-big\"><p>" + num + "</p></td>");
+				sb.append("<td><p class=\"result-text-big\">"+popularProducts.getString(1)+"</p></td>");
+				sb.append("<td><p class=\"result-text\">"+popularProducts.getString(2)+"</p></td>");
 				sb.append("</tr>");
 				num += 1;
 			}
 		} catch (SQLException e) {
             throw new RuntimeException(e);
         }
+		sb.append("</table></center>");
         sb.append("<a class=\"simple-link\" href=\"ControllerServlet?doAction=logout\">Zum Logout</a>");
+		sb.append("</div>");
 		return sb.toString();
 	}
 
@@ -337,8 +349,8 @@ public class BewertungBean extends HttpServlet {
 
 		for (String[] recCombo : finalRecs) {
 			sb.append("<tr>");
-			sb.append("<td><p>" + recCombo[0] + " - " + recCombo[2] + " (CN)</p></td>");
-			sb.append("<td><p> Empfehlung basiert auf: " + recCombo[1] + "</p></td>");
+			sb.append("<td><p class=\"result-text-big\">" + recCombo[0] + " - " + recCombo[2] + " (CN)</p></td>");
+			sb.append("<td><p class=\"result-text\"> Empfehlung basiert auf: " + recCombo[1] + "</p></td>");
 			sb.append("</tr>");
 		}
 
