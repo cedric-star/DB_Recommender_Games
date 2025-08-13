@@ -1,126 +1,150 @@
-body {
-    margin: 0;
-    align-items: center;
-    justify-content: center;
-    font-family: Helvetica, sans-serif;
-    color: #232323;
-    background-color: #e2e2ef;
-    box-sizing: border-box;
-    padding: 15px 30px;
 
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background-color: #e3e6e6;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 20px;
+    z-index: 1000;
+    color: #232f3e;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.header .logo {
+    height: 120px;
+    max-height: 120px;
+    width: auto;
+    margin-right: 20px;
+    object-fit: contain
+}
+
+#large-logo {
+    height: 250px;
+    width: auto;
+}
+
+body {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-
-    width: 100%;
-    min-height: 65vh;
-    height: fit-content;
-
-    border-style: solid;
-    border-width: 5px;
-    border-color: #e2e2ef;
-}
-
-form {
-    box-sizing: border-box;
-    padding: 15px;
-    min-height: 200px;
-
-    background-image: linear-gradient(#93cbea, #789cea);
-
-    display: flex;
-    flex-flow: wrap;
-    gap: 20px;
+    justify-content: flex-start;
     align-items: center;
-    justify-content: space-evenly;
-
-    border: 5px solid var(#93cbea);
-    border-radius: 10px;
-}
-
-input, textarea {
-    background-image: linear-gradient(var(#93cbea), var(#789cea));
-    padding: 5px;
-
-    border: 2px solid var(#93cbea);
-    border-radius: 10px;
-}
-
-a:link, a:visited, a:active {
-    color: #262e40;
-}
-
-#fehler {
-    margin-bottom: 10px; /* Weniger Abstand */
-    color: red;
-    font-weight: bold;
-}
-
-table {
-    width: 80%;
-    margin: 20px auto;
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
-    padding: 5px;
-    align-content: center;
-    display: flex;
+    margin: 0;
+    padding-top: 100px;
+    background-color: #131921;
+    color: #E3E6E6;
+    font-family: Helvetica, Arial, sans-serif;
 }
 
 
-table p {
-    text-align: left;
-}
-
-
-table#aufgabe {
-    width: 90%; /* Mehr Platz für diese Tabelle */
-    margin: 20px auto; /* Zentriert */
-}
-
-table#aufgabe td span#date {
-    display: inline-block;
-    text-align: right; /* Rechtsbündig */
-    padding-right: 15px; /* Platz rechts von der Zellkante */
-    width: calc(100% - 15px); /* Dynamisch mit Platz rechts */
-}
-
-.mod-font {
+.login-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #FFA118;
     text-align: center;
-    margin: 0 auto;
-    display: block;
-}
-
-.rating-title {
-
-}
-
-button, input[type="submit"]{
-    background-color: #adb5bd; /* Hellgrau für die Buttons */
-    color: black; /* Schwarze Schriftfarbe für alle Buttons */
-    padding: 10px 20px; /* Angemessenes Padding für eine gute Größe */
-    font-size: 14px; /* Kleinere Schriftgröße */
-    border: none; /* Keine Ränder */
-    border-radius: 5px; /* Abgerundete Ecken */
-    cursor: pointer; /* Hand-Cursor für klickbare Elemente */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Schattierung für Tiefe */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Übergänge für Hover und Interaktionen */
-    width: auto; /* Breite passt sich dem Inhalt an */
-    min-width: 150px; /* Mindestbreite von 150px */
-    text-align: center; /* Zentriert den Text */
-}
-
-button:hover, input[type="submit"]:hover {
-    background-color: #868e96; /* Etwas dunkleres Grau bei Hover */
-    transform: scale(1.05); /* Leicht vergrößern bei Hover für visuellen Effekt */
-}
-
-button:focus, input[type="submit"]:focus {
-    outline: none; /* Entfernt den Fokus-Rand */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Blauer Schatten, wenn der Button fokussiert ist */
 }
 
 
+a.button-link, button, input[type="submit"] {
+    background-color: #febd69;
+    color: #131921;
+    border: none;
+    border-radius: 25px;
+    padding: 15px 40px;
+    font-weight: 700;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 14px rgba(254, 189, 105, 0.8);
+    min-width: 180px;
+    display: inline-block;
+    text-decoration: none;
+}
+
+a.button-link:hover, button:hover, input[type="submit"]:hover {
+    background-color: #f3a847;
+    color: #131921;
+    box-shadow: 0 6px 20px rgba(243, 168, 71, 0.9);
+}
+
+.recommendations-text {
+    margin-top: 20px;
+    color: #febd69;
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    max-width: 400px;
+    user-select: none;
+    line-height: 1.5;
+    cursor: default;
+}
+
+.simple-link {
+    color: #227CCF;
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.simple-link:hover {
+    color: #b27f1f;
+}
 
 
+input[type="text"], input[type="password"], textarea {
+    padding: 15px 20px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: 4px solid #febd69;
+    background-color: #1a2738;
+    color: #E3E6E6;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
 
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
+    border-color: #f3a847;
+    box-shadow: 0 0 8px #febd69;
+    outline: none;
+}
 
+.subtitle-text {
+    font-size: 18px;
+}
 
+.result-text {
+    font-size: 1rem;
+    color: #E3E6E6;
+    text-align: center;
+}
+
+.text-white-large {
+    color: #E3E6E6;
+    font-size: 1.5rem;
+}
+
+.text-dark-large {
+    color: #131921;
+    font-size: 1.5rem;
+}
+
+.input-area {
+    background-color: #d5dfdf;
+    padding: 40px;
+    border-radius: 50px;
+    align-content: center;
+    text-align: center;
+}
+
+.subtitle-text {
+    color: #131921;
+    font-size: 1.2rem;
+}

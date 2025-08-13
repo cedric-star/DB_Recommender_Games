@@ -2,7 +2,6 @@ package servlets;
 
 import jakarta.servlet.http.HttpServlet;
 
-import java.io.IOException;
 import java.io.Serial;
 
 /**

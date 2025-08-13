@@ -8,7 +8,11 @@
 <title>Error</title>
 </head>
 <body>
+<div class="header">
+    <img src="style/img/Logo.png" alt="Logo" class="logo">
+</div>
 <center><p>Es ist ein Fehler aufgetreten</p></center>
-
+<a class="simple-link" href="../index.jsp">Zurück zur Startseite</a>
 </body>
 </html>
+

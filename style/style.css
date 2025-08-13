@@ -20,10 +20,13 @@
     max-height: 120px;
     width: auto;
     margin-right: 20px;
-    cursor: pointer;
     object-fit: contain
 }
 
+#large-logo {
+    height: 250px;
+    width: auto;
+}
 
 body {
     display: flex;
@@ -33,7 +36,7 @@ body {
     margin: 0;
     padding-top: 100px;
     background-color: #131921;
-    color: white;
+    color: #E3E6E6;
     font-family: Helvetica, Arial, sans-serif;
 }
 
@@ -42,7 +45,7 @@ body {
     font-size: 28px;
     font-weight: 700;
     margin-bottom: 25px;
-    color: #febd69;
+    color: #FFA118;
     text-align: center;
 }
 
@@ -54,7 +57,7 @@ a.button-link, button, input[type="submit"] {
     border-radius: 25px;
     padding: 15px 40px;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 24px;
     cursor: pointer;
     text-align: center;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
@@ -83,7 +86,7 @@ a.button-link:hover, button:hover, input[type="submit"]:hover {
 }
 
 .simple-link {
-    color: #febd69;
+    color: #227CCF;
     font-weight: 600;
     text-decoration: underline;
     cursor: pointer;
@@ -99,9 +102,9 @@ input[type="text"], input[type="password"], textarea {
     padding: 15px 20px;
     font-size: 18px;
     border-radius: 10px;
-    border: 2px solid #febd69;
+    border: 4px solid #febd69;
     background-color: #1a2738;
-    color: white;
+    color: #E3E6E6;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
     width: 100%;
     box-sizing: border-box;
@@ -113,15 +116,35 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
     outline: none;
 }
 
+.subtitle-text {
+    font-size: 18px;
+}
 
 .result-text {
     font-size: 1rem;
-    color: white;
+    color: #E3E6E6;
     text-align: center;
 }
 
 .text-white-large {
-    color: white;
+    color: #E3E6E6;
     font-size: 1.5rem;
 }
 
+.text-dark-large {
+    color: #131921;
+    font-size: 1.5rem;
+}
+
+.input-area {
+    background-color: #d5dfdf;
+    padding: 40px;
+    border-radius: 50px;
+    align-content: center;
+    text-align: center;
+}
+
+.subtitle-text {
+    color: #131921;
+    font-size: 1.2rem;
+}

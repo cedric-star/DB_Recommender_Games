@@ -30,17 +30,17 @@ public class LoginBean extends HttpServlet {
 		sb.append("<center><p></p><br>");
 
 		if (logged) {
-			sb.append("<a href=\"ControllerServlet?doAction=bewertung\">Zur Bewertung</a><br>");
-			sb.append("<a href=\"ControllerServlet?doAction=logout\">Logout</a>");
+			sb.append("<a class=\"result-text\" href=\"ControllerServlet?doAction=bewertung\">Zur Bewertung</a><br>");
+			sb.append("<a class=\"result-text\" href=\"ControllerServlet?doAction=logout\">Logout</a>");
 		} else {
-			sb.append("<h1>Anmeldung</h1>");
-			sb.append("<p>Du brauchst noch einen Account? Hier geht es zur <a href=\"ControllerServlet?doAction=register\">Registrierung</a>.</p>"
-							+ "<br>"
+			sb.append("<img src=\"style/img/Logo.png\" alt=\"Logo\" id=\"large-logo\">");
+			sb.append("<h1 class=\"login-title\" >Anmeldung</h1>");
+			sb.append("<p class=\"subtitle-text\">Du brauchst noch einen Account? Hier geht es zur <a class=\"simple-link\" href=\"ControllerServlet?doAction=register\">Registrierung</a>.</p>"
 							+ "    	<br>"
 							+ "    	<FORM ACTION=\"ControllerServlet?doAction=login\" METHOD=\"POST\">"
-							+ "    	<p>Benutzername </p><input type=\"text\" name=\"username\"></input>"
-							+ "    	<p>Passwort </p><input type=\"password\" name=\"password\"></input><br><br>"
-							+ "    	<INPUT TYPE=\"submit\" VALUE=\"Einloggen\">");
+							+ "    	<p class=\"text-dark-large\">Benutzername </p><input type=\"text\" name=\"username\"></input>"
+							+ "    	<p class=\"text-dark-large\">Passwort </p><input type=\"password\" name=\"password\"></input><br><br>"
+							+ "    	<INPUT TYPE=\"submit\" VALUE=\"Login\">");
 		}
 		sb.append("    	</form>" + "    	</center>");
 

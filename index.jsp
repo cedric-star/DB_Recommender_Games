@@ -13,10 +13,8 @@
 <div class="header">
      <img src="style/img/Logo.png" alt="Logo" class="logo">
 </div>
-<p class="recommendations-text">
-     Sie dir unsere<br>
-     <a href="./jsp/myTest.jsp" class="simple-link" >Empfehlungen</a> an
-</p>
-<jsp:getProperty name="loginBean" property="result" />
+<div class="input-area">
+     <jsp:getProperty name="loginBean" property="result" />
+</div>
 </body>
 </html>

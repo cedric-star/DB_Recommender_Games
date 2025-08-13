@@ -12,18 +12,22 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/style/style.css" />
 </head>
 <body>
-<div class="header">
-    <img src="style/img/Logo.png" alt="Logo" class="logo">
-</div>
-    <h1>Nutzerregistrierung</h1>
-    <br>
-    <FORM ACTION="ControllerServlet?doAction=sendRegisterData" METHOD="POST">
-        <P>Benutzername<BR>
-            <INPUT TYPE="TEXT" NAME="username"  SIZE="30" MAXLENGTH="30"></P>
-        <P>Passwort<BR>
-            <INPUT TYPE="password" NAME="password" SIZE="30" MAXLENGTH="30"></P>
-        <INPUT TYPE="submit" VALUE="Registrieren">
-    </FORM>
+    <div class="header">
+        <img src="style/img/Logo.png" alt="Logo" class="logo">
+    </div>
+    <div class="input-area">
+        <h1 class="login-title">Nutzerregistrierung</h1>
+        <br>
+        <FORM ACTION="ControllerServlet?doAction=sendRegisterData" METHOD="POST">
+            <P class="text-dark-large">Benutzername</P>
+            <INPUT TYPE="TEXT" NAME="username"  SIZE="30" MAXLENGTH="30">
+            <P class="text-dark-large">Passwort</P>
+            <INPUT TYPE="password" NAME="password" SIZE="30" MAXLENGTH="30">
+            <br>
+            <br>
+            <INPUT TYPE="submit" VALUE="Registrieren">
+        </FORM>
+    </div>
 <%-- <jsp:getProperty name="registerBean" property="result"/> --%>
 </body>
 </html>

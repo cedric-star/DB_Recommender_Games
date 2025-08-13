@@ -137,9 +137,9 @@ public class JdbcQueryBean extends HttpServlet {
 	public String getLogin() {
 
 		if (logged) {
-			return "<center><p>Login erfolgreich</p><br><a href=\"index.jsp\">weiter</a></center>";
+			return "<center><p class=\"simple-link\">Login erfolgreich</p><br><a href=\"index.jsp\">weiter</a></center>";
 		} else {
-			return "<center><p>Login Fehlgeschlagen</p><br><a href=\"index.jsp\">weiter</a></center>";
+			return "<center><p class=\"simple-link\">Login Fehlgeschlagen</p><br><a href=\"index.jsp\">weiter</a></center>";
 		}
 
 	}
