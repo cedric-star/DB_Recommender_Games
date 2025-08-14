@@ -30,6 +30,8 @@ Datenbanken-Umgebung: Datagrip (min. 2020)
 Dieses Projekt liefert alle benötigten Daten zu Servlets, Beans, usw. mit, die für die Ausführung des Systems als Apache Tomcat-Server zu ermöglichen.
 Entsprechend werden eine Reihe von Bibliotheken mitgeliefert im WEB-INF/lib Verzeichnis. Wie diese eingebunden werden wird im folgenden Abschnitt erklärt.
 
+Die Releases sind zu finden unter: https://github.com/cedric-star/DB_Recommender_Games/releases
+
 Die Tomcat-Installation wird jedoch *nicht* mitgeliefert. Entsprechend muss die Tomcat-Version 11.0.9 heruntergeladen werden als .zip, welche in einem beliebigen Ordner mit entsprechenden Rechten auf dem System liegen sollte.
 
 ### IntelliJ
