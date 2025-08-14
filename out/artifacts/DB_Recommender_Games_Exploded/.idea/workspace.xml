@@ -9,10 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="201da4e9-997d-43f6-8254-f5f70575bde5" name="Changes" comment="Final 1.2&#10;- Überarbeitung Darstellung der Recommendations&#10;- beliebte Produkte werden immer angezeigt&#10;- mehr ähnliche Produkte werden angezeigt&#10;- neue Aufteilung der Methoden">
+    <list default="true" id="201da4e9-997d-43f6-8254-f5f70575bde5" name="Changes" comment="CSS Überarbeitung">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/DB_Recommender_Games.war" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games/DB_Recommender_Games.war" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games_Exploded/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games_Exploded/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games_Exploded/WEB-INF/classes/servlets/ControllerServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games_Exploded/WEB-INF/classes/servlets/ControllerServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games_Exploded/WEB-INF/classes/servlets/RegisterBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DB_Recommender_Games_Exploded/WEB-INF/classes/servlets/RegisterBean.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,15 +38,22 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;HNT-3R&quot;
-  }
+  &quot;lastFilter&quot;: {}
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/cedric-star/DB_Recommender_Games.git&quot;,
     &quot;accountId&quot;: &quot;597d34c0-7edd-414f-a38a-536a999152db&quot;
+  },
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
+    },
+    &quot;owner&quot;: &quot;cedric-star&quot;,
+    &quot;repository&quot;: &quot;DB_Recommender_Games&quot;
   }
 }</component>
   <component name="LogFilters">
@@ -76,7 +85,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
     &quot;Tomcat Server.Tomcat 11.0.9.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;new__UI&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/remilia/Schreibtisch/HS Harz/4_Semester/Datenbanken 3/DB_Recommender_Games/WEB-INF/lib&quot;,
@@ -244,9 +253,10 @@
       <workItem from="1754677000398" duration="2198000" />
       <workItem from="1754680534242" duration="1378000" />
       <workItem from="1754682241357" duration="2641000" />
-      <workItem from="1754686231255" duration="2847000" />
-      <workItem from="1754848412455" duration="1175000" />
-      <workItem from="1755110416842" duration="424000" />
+      <workItem from="1754686231255" duration="2505000" />
+      <workItem from="1755116075155" duration="922000" />
+      <workItem from="1755117439570" duration="6111000" />
+      <workItem from="1755123797846" duration="210000" />
     </task>
     <task id="LOCAL-00001" summary="First commit of new branch">
       <option name="closed" value="true" />
@@ -304,15 +314,23 @@
       <option name="project" value="LOCAL" />
       <updated>1754677238874</updated>
     </task>
-    <task id="LOCAL-00008" summary="Final 1.2&#10;- Überarbeitung Darstellung der Recommendations&#10;- beliebte Produkte werden immer angezeigt&#10;- mehr ähnliche Produkte werden angezeigt&#10;- neue Aufteilung der Methoden">
+    <task id="LOCAL-00008" summary="Stuff">
       <option name="closed" value="true" />
-      <created>1754688845560</created>
+      <created>1755117733860</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1754688845560</updated>
+      <updated>1755117733861</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="CSS Überarbeitung">
+      <option name="closed" value="true" />
+      <created>1755123234004</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1755123234004</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -326,7 +344,8 @@
     <MESSAGE value="Vollständiger Umbau des gesamten Projets und aller Queries; kleine HTML-Anpassungen." />
     <MESSAGE value="Final 1.0 Push Backend" />
     <MESSAGE value="Final 1.1 Push Backend" />
-    <MESSAGE value="Final 1.2&#10;- Überarbeitung Darstellung der Recommendations&#10;- beliebte Produkte werden immer angezeigt&#10;- mehr ähnliche Produkte werden angezeigt&#10;- neue Aufteilung der Methoden" />
-    <option name="LAST_COMMIT_MESSAGE" value="Final 1.2&#10;- Überarbeitung Darstellung der Recommendations&#10;- beliebte Produkte werden immer angezeigt&#10;- mehr ähnliche Produkte werden angezeigt&#10;- neue Aufteilung der Methoden" />
+    <MESSAGE value="Stuff" />
+    <MESSAGE value="CSS Überarbeitung" />
+    <option name="LAST_COMMIT_MESSAGE" value="CSS Überarbeitung" />
   </component>
 </project>
